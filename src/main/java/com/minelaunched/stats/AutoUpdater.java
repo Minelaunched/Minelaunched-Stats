@@ -105,6 +105,11 @@ public class AutoUpdater {
             }
 
             plugin.getLogger().info("AutoUpdater: Update downloaded successfully! It will be applied on the next server restart.");
+            
+            Bukkit.getScheduler().runTask(plugin, () -> {
+                Bukkit.broadcastMessage("§a[MinelaunchedStats] Une nouvelle mise à jour a été téléchargée ! Redémarrez le serveur pour appliquer le nouveau code.");
+                plugin.reloadPlugin();
+            });
 
         } catch (Exception e) {
             plugin.getLogger().warning("AutoUpdater: Failed to download update: " + e.getMessage());

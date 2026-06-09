@@ -31,6 +31,11 @@ Whether you want to build a custom web dashboard, monitor your infrastructure, o
 4. Open the `plugins/MinelaunchedStats/config.yml` file to adjust the port, endpoint, and toggles.
 5. Access your stats by navigating to your server's IP and port in your browser (e.g., `http://<your-server-ip>:8080/`).
 
+## ⌨️ Commands & Permissions
+
+- `/mlstats reload` - Reloads the configuration file and restarts the internal web server without needing to reboot the entire Minecraft server.
+- **Permission:** `mlstats.admin`
+
 ---
 
 ## ⚙️ Configuration
