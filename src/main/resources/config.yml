@@ -1,0 +1,160 @@
+# MinelaunchedStats Configuration
+web:
+  port: 8080
+  endpoint: "/"
+  pretty_print: false
+  cors_origin: "*"
+
+auto_updater:
+  enabled: true
+  # The GitHub repository from which to fetch updates.
+  github_repo: "Minelaunched/Minelaunched-Stats"
+
+# Toggle EVERY single statistic individually. Set to false to disable.
+stats:
+  system:
+    enabled: true
+    os_name: true
+    os_version: true
+    os_arch: true
+    cores: true
+    cpu_load: true
+    process_cpu_load: true
+    java_version: true
+    java_vendor: true
+    ram_max_mb: true
+    ram_total_mb: true
+    ram_free_mb: true
+    ram_used_mb: true
+    disk_total_mb: true
+    disk_usable_mb: true
+    jvm_uptime_ms: true
+    thread_count: true
+    peak_thread_count: true
+    loaded_classes: true
+    total_loaded_classes: true
+    total_compilation_time_ms: true
+    garbage_collectors: true
+    properties: true
+    environment_variables: true
+
+  server:
+    enabled: true
+    name: true
+    bukkit_name: true
+    version: true
+    bukkit_version: true
+    motd: true
+    online_mode: true
+    is_hardcore: true
+    port: true
+    ip: true
+    tps: true
+    max_players: true
+    whitelist_enabled: true
+    banned_ips_count: true
+    banned_names_count: true
+    whitelisted_players_count: true
+    op_count: true
+    idle_timeout: true
+    generate_structures: true
+    allow_nether: true
+    allow_end: true
+    default_gamemode: true
+    spawn_radius: true
+    view_distance: true
+    connection_throttle: true
+    animal_spawn_limit: true
+    monster_spawn_limit: true
+    water_animal_spawn_limit: true
+    ambient_spawn_limit: true
+    update_folder: true
+    world_type: true
+
+  worlds:
+    enabled: true
+    name: true
+    uuid: true
+    environment: true
+    world_type: true
+    loaded_chunks: true
+    entities: true
+    living_entities: true
+    players: true
+    time: true
+    full_time: true
+    has_storm: true
+    weather_duration: true
+    is_thundering: true
+    thunder_duration: true
+    seed: true
+    difficulty: true
+    max_height: true
+    sea_level: true
+    keep_spawn_in_memory: true
+    pvp: true
+    allow_animals: true
+    allow_monsters: true
+    ticks_per_animal_spawns: true
+    ticks_per_monster_spawns: true
+    animal_spawn_limit: true
+    monster_spawn_limit: true
+    water_animal_spawn_limit: true
+    ambient_spawn_limit: true
+    spawn_location: true
+
+  players:
+    enabled: true
+    online_count: true
+    offline_total: true
+    name: true
+    display_name: true
+    custom_name: true
+    custom_name_visible: true
+    uuid: true
+    ip: true
+    port: true
+    health: true
+    max_health: true
+    food: true
+    saturation: true
+    exhaustion: true
+    level: true
+    exp: true
+    total_exp: true
+    exp_to_level: true
+    gamemode: true
+    is_op: true
+    is_dead: true
+    is_flying: true
+    allow_flight: true
+    is_sneaking: true
+    is_sprinting: true
+    is_sleeping: true
+    fire_ticks: true
+    max_fire_ticks: true
+    fall_distance: true
+    ticks_lived: true
+    player_time: true
+    player_time_offset: true
+    player_weather: true
+    fly_speed: true
+    walk_speed: true
+    first_played_ms: true
+    last_played_ms: true
+    potion_effects: true
+    ping: true
+    location: true
+    compass_target: true
+    inventory: true
+    armor: true
+    game_statistics: true
+
+  plugins:
+    enabled: true
+    name: true
+    version: true
+    plugin_enabled: true
+    author: true
+    description: true
+    website: true
