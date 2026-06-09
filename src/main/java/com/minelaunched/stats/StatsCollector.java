@@ -311,6 +311,16 @@ public class StatsCollector implements Callable<JsonObject> {
                     po.add("placeholders", papi);
                 }
 
+                if (config.getBoolean("hooks.luckperms", true) && com.minelaunched.stats.hooks.LuckPermsHook.isEnabled()) {
+                    JsonObject lpData = com.minelaunched.stats.hooks.LuckPermsHook.getPlayerData(p);
+                    if (lpData != null) po.add("luckperms", lpData);
+                }
+
+                if (config.getBoolean("hooks.essentials", true) && com.minelaunched.stats.hooks.EssentialsHook.isEnabled()) {
+                    JsonObject essData = com.minelaunched.stats.hooks.EssentialsHook.getPlayerData(p);
+                    if (essData != null) po.add("essentials", essData);
+                }
+
                 if (config.getBoolean(cp + ".potion_effects", true)) {
                     JsonArray effects = new JsonArray();
                     for (PotionEffect effect : p.getActivePotionEffects()) {

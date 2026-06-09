@@ -13,6 +13,10 @@ auto_updater:
 hooks:
   # Export Vault Economy balances (players) and total circulating economy (server).
   vault: true
+  # Export LuckPerms primary group (rank), prefix and suffix for each player.
+  luckperms: true
+  # Export EssentialsX AFK, Vanished, GodMode, Muted, and Nickname states for each player.
+  essentials: true
   placeholderapi:
     enabled: true
     # List custom PAPI placeholders to evaluate globally for the server (e.g. %server_online%).

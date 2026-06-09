@@ -22,6 +22,8 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
         // Initialize Plugin Hooks safely
         com.minelaunched.stats.hooks.VaultHook.init();
         com.minelaunched.stats.hooks.PapiHook.init();
+        com.minelaunched.stats.hooks.LuckPermsHook.init();
+        com.minelaunched.stats.hooks.EssentialsHook.init();
 
         // Initialize Web Server
         int port = getConfig().getInt("web.port", 8080);
