@@ -27,7 +27,7 @@ public class AutoUpdater {
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
-                String repo = plugin.getConfig().getString("auto_updater.github_repo", "NeXoS-20/MinelaunchedStats");
+                String repo = plugin.getConfig().getString("auto_updater.github_repo", "Minelaunched/Minelaunched-Stats");
                 URL url = new URL("https://api.github.com/repos/" + repo + "/releases/latest");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");

@@ -1,5 +1,5 @@
 name: MinelaunchedStats
-version: 1.0.0
+version: 1.0.2
 main: com.minelaunched.stats.MinelaunchedStatsPlugin
 api-version: 1.13
 description: Universal Minecraft Server Stats exporter via JSON/HTTP

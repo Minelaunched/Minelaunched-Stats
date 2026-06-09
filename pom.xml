@@ -6,7 +6,8 @@
 
     <groupId>com.minelaunched</groupId>
     <artifactId>MinelaunchedStats</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -40,6 +41,7 @@
     </dependencies>
 
     <build>
+        <finalName>MinelaunchedStats</finalName>
         <plugins>
             <!-- Compiler Plugin -->
             <plugin>

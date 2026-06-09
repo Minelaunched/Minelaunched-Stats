@@ -12,6 +12,9 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        // Dynamically inject missing keys from the internal config.yml into the user's file
+        getConfig().options().copyDefaults(true);
+        saveConfig();
 
         tpsTracker = new TpsTracker();
         tpsTracker.runTaskTimer(this, 0L, 1L);
