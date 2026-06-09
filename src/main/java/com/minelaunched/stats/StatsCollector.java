@@ -163,6 +163,22 @@ public class StatsCollector implements Callable<JsonObject> {
             addSafe(server, cp, "update_folder", () -> Bukkit.getUpdateFolder());
             addSafe(server, cp, "world_type", () -> Bukkit.getWorldType());
 
+            if (config.getBoolean("hooks.vault", true) && com.minelaunched.stats.hooks.VaultHook.isEnabled()) {
+                double totalEconomy = 0;
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    totalEconomy += com.minelaunched.stats.hooks.VaultHook.getBalance(p);
+                }
+                server.addProperty("vault_total_economy", totalEconomy);
+            }
+
+            if (config.getBoolean("hooks.placeholderapi.enabled", true) && com.minelaunched.stats.hooks.PapiHook.isEnabled()) {
+                JsonObject papi = new JsonObject();
+                for (String ph : config.getStringList("hooks.placeholderapi.server_placeholders")) {
+                    papi.addProperty(ph, com.minelaunched.stats.hooks.PapiHook.setPlaceholders(null, ph));
+                }
+                server.add("placeholders", papi);
+            }
+
             root.add("server", server);
         }
 
@@ -282,6 +298,18 @@ public class StatsCollector implements Callable<JsonObject> {
                 addSafe(po, cp, "walk_speed", () -> p.getWalkSpeed());
                 addSafe(po, cp, "first_played_ms", () -> p.getFirstPlayed());
                 addSafe(po, cp, "last_played_ms", () -> p.getLastPlayed());
+
+                if (config.getBoolean("hooks.vault", true) && com.minelaunched.stats.hooks.VaultHook.isEnabled()) {
+                    po.addProperty("vault_balance", com.minelaunched.stats.hooks.VaultHook.getBalance(p));
+                }
+
+                if (config.getBoolean("hooks.placeholderapi.enabled", true) && com.minelaunched.stats.hooks.PapiHook.isEnabled()) {
+                    JsonObject papi = new JsonObject();
+                    for (String ph : config.getStringList("hooks.placeholderapi.player_placeholders")) {
+                        papi.addProperty(ph, com.minelaunched.stats.hooks.PapiHook.setPlaceholders(p, ph));
+                    }
+                    po.add("placeholders", papi);
+                }
 
                 if (config.getBoolean(cp + ".potion_effects", true)) {
                     JsonArray effects = new JsonArray();

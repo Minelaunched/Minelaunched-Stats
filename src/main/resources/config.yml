@@ -10,6 +10,18 @@ auto_updater:
   # The GitHub repository from which to fetch updates.
   github_repo: "Minelaunched/Minelaunched-Stats"
 
+hooks:
+  # Export Vault Economy balances (players) and total circulating economy (server).
+  vault: true
+  placeholderapi:
+    enabled: true
+    # List custom PAPI placeholders to evaluate globally for the server (e.g. %server_online%).
+    server_placeholders:
+      - "%server_uptime%"
+    # List custom PAPI placeholders to evaluate for EACH online player.
+    player_placeholders:
+      - "%player_ping%"
+
 # Toggle EVERY single statistic individually. Set to false to disable.
 stats:
   system:

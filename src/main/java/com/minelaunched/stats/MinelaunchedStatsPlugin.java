@@ -19,6 +19,10 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
         tpsTracker = new TpsTracker();
         tpsTracker.runTaskTimer(this, 0L, 1L);
 
+        // Initialize Plugin Hooks safely
+        com.minelaunched.stats.hooks.VaultHook.init();
+        com.minelaunched.stats.hooks.PapiHook.init();
+
         // Initialize Web Server
         int port = getConfig().getInt("web.port", 8080);
         webServer = new WebServer(this, port);
