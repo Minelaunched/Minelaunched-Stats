@@ -9,6 +9,8 @@ auto_updater:
   enabled: true
   # The GitHub repository from which to fetch updates.
   github_repo: "Minelaunched/Minelaunched-Stats"
+  # Automatically restarts the server (via /restart) when an update is downloaded AND there are 0 players online.
+  smart_restart: true
 
 hooks:
   # Export Vault Economy balances (players) and total circulating economy (server).

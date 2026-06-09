@@ -104,11 +104,25 @@ public class AutoUpdater {
                 }
             }
 
-            plugin.getLogger().info("AutoUpdater: Update downloaded successfully! It will be applied on the next server restart.");
+            plugin.getLogger().info("AutoUpdater: Update downloaded successfully!");
             
             Bukkit.getScheduler().runTask(plugin, () -> {
-                Bukkit.broadcastMessage("§a[MinelaunchedStats] Une nouvelle mise à jour a été téléchargée ! Redémarrez le serveur pour appliquer le nouveau code.");
+                Bukkit.broadcastMessage("§a[MinelaunchedStats] Une nouvelle mise à jour a été téléchargée ! Elle sera appliquée au prochain redémarrage.");
                 plugin.reloadPlugin();
+                
+                if (plugin.getConfig().getBoolean("auto_updater.smart_restart", true)) {
+                    plugin.getLogger().info("AutoUpdater: Smart Restart is enabled. Waiting for the server to be empty to restart...");
+                    new org.bukkit.scheduler.BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            if (Bukkit.getOnlinePlayers().isEmpty()) {
+                                plugin.getLogger().info("AutoUpdater: Server is empty. Applying update via automatic restart...");
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "restart");
+                                this.cancel();
+                            }
+                        }
+                    }.runTaskTimer(plugin, 20L * 10, 20L * 60); // Check every 60 seconds
+                }
             });
 
         } catch (Exception e) {
