@@ -21,9 +21,46 @@ Whether you want to build a custom web dashboard, monitor your infrastructure, o
 - **🛡️ Anti-DDOS Caching:** Prevents server lag by caching responses to stop API spam.
 - **🔒 Secure:** Optionally require an authorization token to access your data.
 
+## 🧠 Plugin Architecture (Mind Map)
+
+```mermaid
+mindmap
+  root((MinelaunchedStats))
+    HTTP Web Server
+      JSON Endpoints
+      Token Authentication
+      Anti-DDOS Cache
+    Core Data
+      Server Stats
+      Worlds & Entities
+      System (RAM, CPU, Disk)
+    13 API Hooks
+      Economy
+        Vault
+        PlayerPoints
+        Jobs Reborn
+      Admin
+        LuckPerms
+        EssentialsX
+        CMI
+      RPG & Survival
+        AuraSkills
+        mcMMO
+        Towny
+        GriefPrevention
+      Clients & Formats
+        ViaVersion
+        Floodgate
+        PlaceholderAPI
+    Smart Auto-Updater
+      GitHub Releases
+      Zero-Downtime Restart
+      Auto Config Update
+```
+
 ---
 
-## 📦 Installation
+## 🚀 How to Installation
 
 1. Download the latest `MinelaunchedStats.jar` from the [Releases](https://github.com/Minelaunched/Minelaunched-Stats/releases) page.
 2. Place the `.jar` file into your server's `plugins` folder.
