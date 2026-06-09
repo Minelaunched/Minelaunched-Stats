@@ -18,8 +18,6 @@ Whether you want to build a custom web dashboard, monitor your infrastructure, o
 - **⚡ Native Fast Web Server:** Hosts a lightweight JVM web server directly inside the plugin. No Apache or Nginx required.
 - **⚙️ Ultimate Customization:** Every single JSON field can be individually toggled in the `config.yml`.
 - **🚀 Auto-Updater:** Built-in OTA (Over-The-Air) updates hooked directly into GitHub Releases.
-- **🛡️ Anti-DDOS Caching:** Prevents server lag by caching responses to stop API spam.
-- **🔒 Secure:** Optionally require an authorization token to access your data.
 
 ## 🧠 Plugin Architecture (Mind Map)
 
@@ -28,8 +26,6 @@ mindmap
   root((MinelaunchedStats))
     HTTP Web Server
       JSON Endpoints
-      Token Authentication
-      Anti-DDOS Cache
     Core Data
       Server Stats
       Worlds & Entities
