@@ -321,6 +321,21 @@ public class StatsCollector implements Callable<JsonObject> {
                     if (essData != null) po.add("essentials", essData);
                 }
 
+                if (config.getBoolean("hooks.viaversion", true) && com.minelaunched.stats.hooks.ViaVersionHook.isEnabled()) {
+                    JsonObject viaData = com.minelaunched.stats.hooks.ViaVersionHook.getPlayerData(p);
+                    if (viaData != null) po.add("viaversion", viaData);
+                }
+
+                if (config.getBoolean("hooks.floodgate", true) && com.minelaunched.stats.hooks.FloodgateHook.isEnabled()) {
+                    JsonObject floodgateData = com.minelaunched.stats.hooks.FloodgateHook.getPlayerData(p);
+                    if (floodgateData != null) po.add("floodgate", floodgateData);
+                }
+
+                if (config.getBoolean("hooks.mcmmo", true) && com.minelaunched.stats.hooks.McMMOHook.isEnabled()) {
+                    JsonObject mcmmoData = com.minelaunched.stats.hooks.McMMOHook.getPlayerData(p);
+                    if (mcmmoData != null) po.add("mcmmo", mcmmoData);
+                }
+
                 if (config.getBoolean(cp + ".potion_effects", true)) {
                     JsonArray effects = new JsonArray();
                     for (PotionEffect effect : p.getActivePotionEffects()) {

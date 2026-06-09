@@ -25,6 +25,12 @@ hooks:
     # List custom PAPI placeholders to evaluate for EACH online player.
     player_placeholders:
       - "%player_ping%"
+  # Export ViaVersion exact protocol version of each player.
+  viaversion: true
+  # Export Floodgate (Geyser) Bedrock status and device platform.
+  floodgate: true
+  # Export McMMO Power Level and skills.
+  mcmmo: true
 
 # Toggle EVERY single statistic individually. Set to false to disable.
 stats:
