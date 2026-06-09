@@ -3,6 +3,7 @@ package com.minelaunched.stats;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.Bukkit;
 
 import java.io.IOException;
 
@@ -77,7 +78,72 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
                 }
             }
         }
+        Bukkit.getScheduler().cancelTasks(this);
         return false;
+    }
+
+    private void migrateConfig() {
+        if (getConfig().isBoolean("hooks.vault")) {
+            Bukkit.getLogger().info("[MinelaunchedStats] Migrating old config format to new granular format...");
+            
+            boolean oldVault = getConfig().getBoolean("hooks.vault", true);
+            getConfig().set("hooks.vault", null);
+            getConfig().set("hooks.vault.enabled", oldVault);
+            getConfig().set("hooks.vault.export_player_balance", true);
+            getConfig().set("hooks.vault.export_server_economy", true);
+
+            boolean oldLuckPerms = getConfig().getBoolean("hooks.luckperms", true);
+            getConfig().set("hooks.luckperms", null);
+            getConfig().set("hooks.luckperms.enabled", oldLuckPerms);
+            getConfig().set("hooks.luckperms.export_primary_group", true);
+            getConfig().set("hooks.luckperms.export_prefix", true);
+            getConfig().set("hooks.luckperms.export_suffix", true);
+
+            boolean oldEssentials = getConfig().getBoolean("hooks.essentials", true);
+            getConfig().set("hooks.essentials", null);
+            getConfig().set("hooks.essentials.enabled", oldEssentials);
+            getConfig().set("hooks.essentials.export_afk", true);
+            getConfig().set("hooks.essentials.export_vanish", true);
+            getConfig().set("hooks.essentials.export_god_mode", true);
+            getConfig().set("hooks.essentials.export_muted", true);
+            getConfig().set("hooks.essentials.export_nickname", true);
+
+            boolean oldViaVersion = getConfig().getBoolean("hooks.viaversion", true);
+            getConfig().set("hooks.viaversion", null);
+            getConfig().set("hooks.viaversion.enabled", oldViaVersion);
+            getConfig().set("hooks.viaversion.export_protocol_version", true);
+
+            boolean oldFloodgate = getConfig().getBoolean("hooks.floodgate", true);
+            getConfig().set("hooks.floodgate", null);
+            getConfig().set("hooks.floodgate.enabled", oldFloodgate);
+            getConfig().set("hooks.floodgate.export_is_bedrock", true);
+            getConfig().set("hooks.floodgate.export_device_os", true);
+
+            boolean oldMcmmo = getConfig().getBoolean("hooks.mcmmo", true);
+            getConfig().set("hooks.mcmmo", null);
+            getConfig().set("hooks.mcmmo.enabled", oldMcmmo);
+            getConfig().set("hooks.mcmmo.export_power_level", true);
+
+            boolean oldPlayerPoints = getConfig().getBoolean("hooks.playerpoints", true);
+            getConfig().set("hooks.playerpoints", null);
+            getConfig().set("hooks.playerpoints.enabled", oldPlayerPoints);
+            getConfig().set("hooks.playerpoints.export_balance", true);
+
+            boolean oldGriefPrevention = getConfig().getBoolean("hooks.griefprevention", true);
+            getConfig().set("hooks.griefprevention", null);
+            getConfig().set("hooks.griefprevention.enabled", oldGriefPrevention);
+            getConfig().set("hooks.griefprevention.export_claim_blocks", true);
+            getConfig().set("hooks.griefprevention.export_bonus_blocks", true);
+
+            boolean oldAuraSkills = getConfig().getBoolean("hooks.auraskills", true);
+            getConfig().set("hooks.auraskills", null);
+            getConfig().set("hooks.auraskills.enabled", oldAuraSkills);
+            getConfig().set("hooks.auraskills.export_mana", true);
+            getConfig().set("hooks.auraskills.export_power_level", true);
+            
+            saveConfig();
+            Bukkit.getLogger().info("[MinelaunchedStats] Config migration complete!");
+        }
     }
 
     public void reloadPlugin() {
@@ -92,6 +158,7 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
         
         // Reload config
         reloadConfig();
+        migrateConfig();
         getConfig().options().copyDefaults(true);
         saveConfig();
         
