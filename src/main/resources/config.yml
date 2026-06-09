@@ -33,6 +33,12 @@ hooks:
   floodgate: true
   # Export McMMO Power Level and skills.
   mcmmo: true
+  # Export PlayerPoints balance (Premium Currency).
+  playerpoints: true
+  # Export GriefPrevention claim blocks and bonus claim blocks.
+  griefprevention: true
+  # Export AuraSkills (AureliumSkills) Mana and Global Level.
+  auraskills: true
 
 # Toggle EVERY single statistic individually. Set to false to disable.
 stats:

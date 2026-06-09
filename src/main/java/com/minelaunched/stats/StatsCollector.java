@@ -336,6 +336,21 @@ public class StatsCollector implements Callable<JsonObject> {
                     if (mcmmoData != null) po.add("mcmmo", mcmmoData);
                 }
 
+                if (config.getBoolean("hooks.playerpoints", true) && com.minelaunched.stats.hooks.PlayerPointsHook.isEnabled()) {
+                    JsonObject ppData = com.minelaunched.stats.hooks.PlayerPointsHook.getPlayerData(p);
+                    if (ppData != null) po.add("playerpoints", ppData);
+                }
+
+                if (config.getBoolean("hooks.griefprevention", true) && com.minelaunched.stats.hooks.GriefPreventionHook.isEnabled()) {
+                    JsonObject gpData = com.minelaunched.stats.hooks.GriefPreventionHook.getPlayerData(p);
+                    if (gpData != null) po.add("griefprevention", gpData);
+                }
+
+                if (config.getBoolean("hooks.auraskills", true) && com.minelaunched.stats.hooks.AuraSkillsHook.isEnabled()) {
+                    JsonObject auraData = com.minelaunched.stats.hooks.AuraSkillsHook.getPlayerData(p);
+                    if (auraData != null) po.add("auraskills", auraData);
+                }
+
                 if (config.getBoolean(cp + ".potion_effects", true)) {
                     JsonArray effects = new JsonArray();
                     for (PotionEffect effect : p.getActivePotionEffects()) {

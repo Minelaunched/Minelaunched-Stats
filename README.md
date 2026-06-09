@@ -109,12 +109,15 @@ A list of all installed plugins, including:
 To make MinelaunchedStats truly universal, we have implemented completely safe, modular integrations with the biggest plugins in Minecraft. If you don't have them installed, the plugin ignores them gracefully without crashing:
 
 - **Vault:** Exports the exact balance of each player, and calculates the total server economy (GDP) for inflation tracking.
+- **PlayerPoints:** Exports the exact balance of premium currency (gems, points) for each player.
 - **PlaceholderAPI:** Allows you to translate ANY custom placeholder strings globally (e.g. `%server_uptime%`) or per-player (e.g. `%player_ping%`).
 - **LuckPerms:** Exports the Primary Group (Rank), Prefix, and Suffix of each online player.
 - **EssentialsX:** Exports real-time status attributes: `is_afk`, `is_vanished`, `is_god_mode`, `is_muted`, and `nickname`.
+- **GriefPrevention:** Exports the accrued `claim_blocks` and `bonus_blocks` of players.
 - **ViaVersion:** Exports the exact Minecraft client protocol version of each player (e.g. 1.20.4).
 - **Floodgate (Geyser):** Automatically tags players as Java or Bedrock and exports their device platform (Xbox, iOS, Android).
 - **mcMMO:** Exports the RPG `power_level` of players to track their progress.
+- **AuraSkills (AureliumSkills):** Exports the live `mana` and global `power_level` of players.
 
 ---
 
