@@ -113,11 +113,16 @@ To make MinelaunchedStats truly universal, we have implemented completely safe, 
 - **PlaceholderAPI:** Allows you to translate ANY custom placeholder strings globally (e.g. `%server_uptime%`) or per-player (e.g. `%player_ping%`).
 - **LuckPerms:** Exports the Primary Group (Rank), Prefix, and Suffix of each online player.
 - **EssentialsX:** Exports real-time status attributes: `is_afk`, `is_vanished`, `is_god_mode`, `is_muted`, and `nickname`.
+- **CMI:** The Premium alternative to Essentials. Exports `is_afk`, `is_vanished`, and `is_god_mode`.
 - **GriefPrevention:** Exports the accrued `claim_blocks` and `bonus_blocks` of players.
+- **Towny (TownyAdvanced):** Exports `town`, `nation`, and `title` of the player for geopolitical servers.
+- **Jobs Reborn:** Exports a list of all active `jobs` and their `level` for each player.
 - **ViaVersion:** Exports the exact Minecraft client protocol version of each player (e.g. 1.20.4).
 - **Floodgate (Geyser):** Automatically tags players as Java or Bedrock and exports their device platform (Xbox, iOS, Android).
 - **mcMMO:** Exports the RPG `power_level` of players to track their progress.
 - **AuraSkills (AureliumSkills):** Exports the live `mana` and global `power_level` of players.
+
+> **💡 Granular Control:** Every single exported property from these APIs can be individually disabled in `config.yml`. Don't want the nickname from Essentials? Set `export_nickname: false`.
 
 ---
 

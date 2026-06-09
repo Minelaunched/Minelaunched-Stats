@@ -163,7 +163,7 @@ public class StatsCollector implements Callable<JsonObject> {
             addSafe(server, cp, "update_folder", () -> Bukkit.getUpdateFolder());
             addSafe(server, cp, "world_type", () -> Bukkit.getWorldType());
 
-            if (config.getBoolean("hooks.vault", true) && com.minelaunched.stats.hooks.VaultHook.isEnabled()) {
+            if (config.getBoolean("hooks.vault.enabled", true) && config.getBoolean("hooks.vault.export_server_economy", true) && com.minelaunched.stats.hooks.VaultHook.isEnabled()) {
                 double totalEconomy = 0;
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     totalEconomy += com.minelaunched.stats.hooks.VaultHook.getBalance(p);
@@ -299,7 +299,7 @@ public class StatsCollector implements Callable<JsonObject> {
                 addSafe(po, cp, "first_played_ms", () -> p.getFirstPlayed());
                 addSafe(po, cp, "last_played_ms", () -> p.getLastPlayed());
 
-                if (config.getBoolean("hooks.vault", true) && com.minelaunched.stats.hooks.VaultHook.isEnabled()) {
+                if (config.getBoolean("hooks.vault.enabled", true) && config.getBoolean("hooks.vault.export_player_balance", true) && com.minelaunched.stats.hooks.VaultHook.isEnabled()) {
                     po.addProperty("vault_balance", com.minelaunched.stats.hooks.VaultHook.getBalance(p));
                 }
 
@@ -311,44 +311,102 @@ public class StatsCollector implements Callable<JsonObject> {
                     po.add("placeholders", papi);
                 }
 
-                if (config.getBoolean("hooks.luckperms", true) && com.minelaunched.stats.hooks.LuckPermsHook.isEnabled()) {
+                if (config.getBoolean("hooks.luckperms.enabled", true) && com.minelaunched.stats.hooks.LuckPermsHook.isEnabled()) {
                     JsonObject lpData = com.minelaunched.stats.hooks.LuckPermsHook.getPlayerData(p);
-                    if (lpData != null) po.add("luckperms", lpData);
+                    if (lpData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.luckperms.export_primary_group", true) && lpData.has("primary_group")) filtered.add("primary_group", lpData.get("primary_group"));
+                        if (config.getBoolean("hooks.luckperms.export_prefix", true) && lpData.has("prefix")) filtered.add("prefix", lpData.get("prefix"));
+                        if (config.getBoolean("hooks.luckperms.export_suffix", true) && lpData.has("suffix")) filtered.add("suffix", lpData.get("suffix"));
+                        if (filtered.size() > 0) po.add("luckperms", filtered);
+                    }
                 }
 
-                if (config.getBoolean("hooks.essentials", true) && com.minelaunched.stats.hooks.EssentialsHook.isEnabled()) {
+                if (config.getBoolean("hooks.essentials.enabled", true) && com.minelaunched.stats.hooks.EssentialsHook.isEnabled()) {
                     JsonObject essData = com.minelaunched.stats.hooks.EssentialsHook.getPlayerData(p);
-                    if (essData != null) po.add("essentials", essData);
+                    if (essData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.essentials.export_afk", true) && essData.has("is_afk")) filtered.add("is_afk", essData.get("is_afk"));
+                        if (config.getBoolean("hooks.essentials.export_vanish", true) && essData.has("is_vanished")) filtered.add("is_vanished", essData.get("is_vanished"));
+                        if (config.getBoolean("hooks.essentials.export_god_mode", true) && essData.has("is_god_mode")) filtered.add("is_god_mode", essData.get("is_god_mode"));
+                        if (config.getBoolean("hooks.essentials.export_muted", true) && essData.has("is_muted")) filtered.add("is_muted", essData.get("is_muted"));
+                        if (config.getBoolean("hooks.essentials.export_nickname", true) && essData.has("nickname")) filtered.add("nickname", essData.get("nickname"));
+                        if (filtered.size() > 0) po.add("essentials", filtered);
+                    }
                 }
 
-                if (config.getBoolean("hooks.viaversion", true) && com.minelaunched.stats.hooks.ViaVersionHook.isEnabled()) {
+                if (config.getBoolean("hooks.cmi.enabled", true) && com.minelaunched.stats.hooks.CMIHook.isEnabled()) {
+                    JsonObject cmiData = com.minelaunched.stats.hooks.CMIHook.getPlayerData(p);
+                    if (cmiData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.cmi.export_afk", true) && cmiData.has("is_afk")) filtered.add("is_afk", cmiData.get("is_afk"));
+                        if (config.getBoolean("hooks.cmi.export_vanish", true) && cmiData.has("is_vanished")) filtered.add("is_vanished", cmiData.get("is_vanished"));
+                        if (config.getBoolean("hooks.cmi.export_god_mode", true) && cmiData.has("is_god_mode")) filtered.add("is_god_mode", cmiData.get("is_god_mode"));
+                        if (filtered.size() > 0) po.add("cmi", filtered);
+                    }
+                }
+
+                if (config.getBoolean("hooks.viaversion.enabled", true) && config.getBoolean("hooks.viaversion.export_protocol_version", true) && com.minelaunched.stats.hooks.ViaVersionHook.isEnabled()) {
                     JsonObject viaData = com.minelaunched.stats.hooks.ViaVersionHook.getPlayerData(p);
                     if (viaData != null) po.add("viaversion", viaData);
                 }
 
-                if (config.getBoolean("hooks.floodgate", true) && com.minelaunched.stats.hooks.FloodgateHook.isEnabled()) {
+                if (config.getBoolean("hooks.floodgate.enabled", true) && com.minelaunched.stats.hooks.FloodgateHook.isEnabled()) {
                     JsonObject floodgateData = com.minelaunched.stats.hooks.FloodgateHook.getPlayerData(p);
-                    if (floodgateData != null) po.add("floodgate", floodgateData);
+                    if (floodgateData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.floodgate.export_is_bedrock", true) && floodgateData.has("is_bedrock")) filtered.add("is_bedrock", floodgateData.get("is_bedrock"));
+                        if (config.getBoolean("hooks.floodgate.export_device_os", true) && floodgateData.has("device_os")) filtered.add("device_os", floodgateData.get("device_os"));
+                        if (floodgateData.has("language_code")) filtered.add("language_code", floodgateData.get("language_code"));
+                        if (filtered.size() > 0) po.add("floodgate", filtered);
+                    }
                 }
 
-                if (config.getBoolean("hooks.mcmmo", true) && com.minelaunched.stats.hooks.McMMOHook.isEnabled()) {
+                if (config.getBoolean("hooks.mcmmo.enabled", true) && config.getBoolean("hooks.mcmmo.export_power_level", true) && com.minelaunched.stats.hooks.McMMOHook.isEnabled()) {
                     JsonObject mcmmoData = com.minelaunched.stats.hooks.McMMOHook.getPlayerData(p);
                     if (mcmmoData != null) po.add("mcmmo", mcmmoData);
                 }
 
-                if (config.getBoolean("hooks.playerpoints", true) && com.minelaunched.stats.hooks.PlayerPointsHook.isEnabled()) {
+                if (config.getBoolean("hooks.playerpoints.enabled", true) && config.getBoolean("hooks.playerpoints.export_balance", true) && com.minelaunched.stats.hooks.PlayerPointsHook.isEnabled()) {
                     JsonObject ppData = com.minelaunched.stats.hooks.PlayerPointsHook.getPlayerData(p);
                     if (ppData != null) po.add("playerpoints", ppData);
                 }
 
-                if (config.getBoolean("hooks.griefprevention", true) && com.minelaunched.stats.hooks.GriefPreventionHook.isEnabled()) {
+                if (config.getBoolean("hooks.griefprevention.enabled", true) && com.minelaunched.stats.hooks.GriefPreventionHook.isEnabled()) {
                     JsonObject gpData = com.minelaunched.stats.hooks.GriefPreventionHook.getPlayerData(p);
-                    if (gpData != null) po.add("griefprevention", gpData);
+                    if (gpData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.griefprevention.export_claim_blocks", true) && gpData.has("claim_blocks")) filtered.add("claim_blocks", gpData.get("claim_blocks"));
+                        if (config.getBoolean("hooks.griefprevention.export_bonus_blocks", true) && gpData.has("bonus_blocks")) filtered.add("bonus_blocks", gpData.get("bonus_blocks"));
+                        if (gpData.has("total_blocks")) filtered.add("total_blocks", gpData.get("total_blocks"));
+                        if (filtered.size() > 0) po.add("griefprevention", filtered);
+                    }
                 }
 
-                if (config.getBoolean("hooks.auraskills", true) && com.minelaunched.stats.hooks.AuraSkillsHook.isEnabled()) {
+                if (config.getBoolean("hooks.auraskills.enabled", true) && com.minelaunched.stats.hooks.AuraSkillsHook.isEnabled()) {
                     JsonObject auraData = com.minelaunched.stats.hooks.AuraSkillsHook.getPlayerData(p);
-                    if (auraData != null) po.add("auraskills", auraData);
+                    if (auraData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.auraskills.export_mana", true) && auraData.has("mana")) filtered.add("mana", auraData.get("mana"));
+                        if (config.getBoolean("hooks.auraskills.export_power_level", true) && auraData.has("power_level")) filtered.add("power_level", auraData.get("power_level"));
+                        if (filtered.size() > 0) po.add("auraskills", filtered);
+                    }
+                }
+                
+                if (config.getBoolean("hooks.towny.enabled", true) && com.minelaunched.stats.hooks.TownyHook.isEnabled()) {
+                    JsonObject townyData = com.minelaunched.stats.hooks.TownyHook.getPlayerData(p);
+                    if (townyData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.towny.export_town", true) && townyData.has("town")) filtered.add("town", townyData.get("town"));
+                        if (config.getBoolean("hooks.towny.export_nation", true) && townyData.has("nation")) filtered.add("nation", townyData.get("nation"));
+                        if (config.getBoolean("hooks.towny.export_title", true) && townyData.has("title")) filtered.add("title", townyData.get("title"));
+                        if (filtered.size() > 0) po.add("towny", filtered);
+                    }
+                }
+                
+                if (config.getBoolean("hooks.jobsreborn.enabled", true) && config.getBoolean("hooks.jobsreborn.export_jobs_list", true) && com.minelaunched.stats.hooks.JobsRebornHook.isEnabled()) {
+                    JsonObject jobsData = com.minelaunched.stats.hooks.JobsRebornHook.getPlayerData(p);
+                    if (jobsData != null) po.add("jobsreborn", jobsData);
                 }
 
                 if (config.getBoolean(cp + ".potion_effects", true)) {

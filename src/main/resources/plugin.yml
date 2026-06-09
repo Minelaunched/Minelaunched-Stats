@@ -4,7 +4,7 @@ main: com.minelaunched.stats.MinelaunchedStatsPlugin
 api-version: 1.13
 description: Universal Minecraft Server Stats exporter via JSON/HTTP
 author: [NeXoS_20, Minelaunched]
-softdepend: [Vault, PlaceholderAPI, Essentials, LuckPerms, ViaVersion, floodgate, mcMMO, PlayerPoints, GriefPrevention, AuraSkills]
+softdepend: [Vault, PlaceholderAPI, Essentials, LuckPerms, ViaVersion, floodgate, mcMMO, PlayerPoints, GriefPrevention, AuraSkills, Towny, Jobs, CMI]
 
 commands:
   mlstats:

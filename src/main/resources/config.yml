@@ -13,32 +13,76 @@ auto_updater:
   smart_restart: true
 
 hooks:
-  # Export Vault Economy balances (players) and total circulating economy (server).
-  vault: true
-  # Export LuckPerms primary group (rank), prefix and suffix for each player.
-  luckperms: true
-  # Export EssentialsX AFK, Vanished, GodMode, Muted, and Nickname states for each player.
-  essentials: true
+  vault:
+    enabled: true
+    export_player_balance: true
+    export_server_economy: true
+  
   placeholderapi:
     enabled: true
-    # List custom PAPI placeholders to evaluate globally for the server (e.g. %server_online%).
+    # Global placeholders
     server_placeholders:
       - "%server_uptime%"
-    # List custom PAPI placeholders to evaluate for EACH online player.
+    # Per-player placeholders
     player_placeholders:
       - "%player_ping%"
-  # Export ViaVersion exact protocol version of each player.
-  viaversion: true
-  # Export Floodgate (Geyser) Bedrock status and device platform.
-  floodgate: true
-  # Export McMMO Power Level and skills.
-  mcmmo: true
-  # Export PlayerPoints balance (Premium Currency).
-  playerpoints: true
-  # Export GriefPrevention claim blocks and bonus claim blocks.
-  griefprevention: true
-  # Export AuraSkills (AureliumSkills) Mana and Global Level.
-  auraskills: true
+      
+  luckperms:
+    enabled: true
+    export_primary_group: true
+    export_prefix: true
+    export_suffix: true
+    
+  essentials:
+    enabled: true
+    export_afk: true
+    export_vanish: true
+    export_god_mode: true
+    export_muted: true
+    export_nickname: true
+
+  cmi:
+    enabled: true
+    export_afk: true
+    export_vanish: true
+    export_god_mode: true
+
+  viaversion:
+    enabled: true
+    export_protocol_version: true
+    
+  floodgate:
+    enabled: true
+    export_is_bedrock: true
+    export_device_os: true
+    
+  mcmmo:
+    enabled: true
+    export_power_level: true
+    
+  auraskills:
+    enabled: true
+    export_mana: true
+    export_power_level: true
+    
+  playerpoints:
+    enabled: true
+    export_balance: true
+    
+  griefprevention:
+    enabled: true
+    export_claim_blocks: true
+    export_bonus_blocks: true
+    
+  towny:
+    enabled: true
+    export_town: true
+    export_nation: true
+    export_title: true
+    
+  jobsreborn:
+    enabled: true
+    export_jobs_list: true
 
 # Toggle EVERY single statistic individually. Set to false to disable.
 stats:

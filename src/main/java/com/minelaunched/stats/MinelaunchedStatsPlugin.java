@@ -32,6 +32,9 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
         com.minelaunched.stats.hooks.PlayerPointsHook.init();
         com.minelaunched.stats.hooks.GriefPreventionHook.init();
         com.minelaunched.stats.hooks.AuraSkillsHook.init();
+        com.minelaunched.stats.hooks.TownyHook.init();
+        com.minelaunched.stats.hooks.JobsRebornHook.init();
+        com.minelaunched.stats.hooks.CMIHook.init();
 
         // Initialize Web Server
         int port = getConfig().getInt("web.port", 8080);
