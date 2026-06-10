@@ -24,53 +24,7 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
         tpsTracker.runTaskTimer(this, 0L, 1L);
 
         // Initialize Plugin Hooks safely
-        com.minelaunched.stats.hooks.VaultHook.init();
-        com.minelaunched.stats.hooks.PapiHook.init();
-        com.minelaunched.stats.hooks.LuckPermsHook.init();
-        com.minelaunched.stats.hooks.EssentialsHook.init();
-        com.minelaunched.stats.hooks.ViaVersionHook.init();
-        com.minelaunched.stats.hooks.FloodgateHook.init();
-        com.minelaunched.stats.hooks.McMMOHook.init();
-        com.minelaunched.stats.hooks.PlayerPointsHook.init();
-        com.minelaunched.stats.hooks.GriefPreventionHook.init();
-        com.minelaunched.stats.hooks.AuraSkillsHook.init();
-        com.minelaunched.stats.hooks.TownyHook.init();
-        com.minelaunched.stats.hooks.JobsRebornHook.init();
-        com.minelaunched.stats.hooks.CMIHook.init();
-        com.minelaunched.stats.hooks.DiscordSRVHook.init();
-        com.minelaunched.stats.hooks.VulcanHook.init();
-        com.minelaunched.stats.hooks.SuperVanishHook.init();
-        com.minelaunched.stats.hooks.LandsHook.init();
-        com.minelaunched.stats.hooks.FactionsHook.init();
-        com.minelaunched.stats.hooks.CombatLogXHook.init();
-        com.minelaunched.stats.hooks.SuperiorSkyblockHook.init();
-        com.minelaunched.stats.hooks.DeluxeTagsHook.init();
-        com.minelaunched.stats.hooks.SkinsRestorerHook.init();
-        com.minelaunched.stats.hooks.CitizensHook.init();
-        com.minelaunched.stats.hooks.TokenManagerHook.init();
-        com.minelaunched.stats.hooks.PvPManagerHook.init();
-        com.minelaunched.stats.hooks.SimpleClansHook.init();
-        com.minelaunched.stats.hooks.VotingPluginHook.init();
-        com.minelaunched.stats.hooks.BountyHuntersHook.init();
-
-        com.minelaunched.stats.hooks.BentoBoxHook.init();
-        com.minelaunched.stats.hooks.IridiumSkyblockHook.init();
-        com.minelaunched.stats.hooks.GriefDefenderHook.init();
-        com.minelaunched.stats.hooks.SpartanHook.init();
-        com.minelaunched.stats.hooks.GrimACHook.init();
-        com.minelaunched.stats.hooks.MatrixHook.init();
-        com.minelaunched.stats.hooks.GemsEconomyHook.init();
-        com.minelaunched.stats.hooks.BeastTokensHook.init();
-        com.minelaunched.stats.hooks.AlonsoTagsHook.init();
-        com.minelaunched.stats.hooks.MarriageMasterHook.init();
-        com.minelaunched.stats.hooks.MyPetHook.init();
-        com.minelaunched.stats.hooks.SlimefunHook.init();
-        com.minelaunched.stats.hooks.QuestsHook.init();
-        com.minelaunched.stats.hooks.VampireHook.init();
-        com.minelaunched.stats.hooks.AureliumSkillsHook.init();
-        com.minelaunched.stats.hooks.CrazyCratesHook.init();
-        com.minelaunched.stats.hooks.ExcellentCratesHook.init();
-        com.minelaunched.stats.hooks.GeyserHook.init();
+        com.minelaunched.stats.hooks.HookManager.initAll();
         com.minelaunched.stats.hooks.LiteBansHook.init();
         com.minelaunched.stats.hooks.AdvancedBanHook.init();
 
