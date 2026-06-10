@@ -21,10 +21,8 @@ public class SuperVanishHook extends MinelaunchedHook {
                 Class<?> vanishApiClass = Class.forName("de.myzelyam.api.vanish.VanishAPI");
                 isVanishedMethod = vanishApiClass.getMethod("isInvisible", Player.class);
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into SuperVanish/PremiumVanish!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into SuperVanish/PremiumVanish.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

@@ -35,10 +35,8 @@ public class FactionsHook extends MinelaunchedHook {
                 getTag = factionClass.getMethod("getTag");
                 
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into FactionsUUID!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into FactionsUUID.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

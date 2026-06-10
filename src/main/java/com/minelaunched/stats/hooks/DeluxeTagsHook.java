@@ -21,10 +21,8 @@ public class DeluxeTagsHook extends MinelaunchedHook {
                 Class<?> apiClass = Class.forName("me.clip.deluxetags.DeluxeTag");
                 getPlayerDisplayTag = apiClass.getMethod("getPlayerDisplayTag", Player.class);
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into DeluxeTags!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into DeluxeTags.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

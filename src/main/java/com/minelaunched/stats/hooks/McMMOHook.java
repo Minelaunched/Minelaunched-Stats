@@ -21,10 +21,8 @@ public class McMMOHook extends MinelaunchedHook {
                 Class<?> experienceAPI = Class.forName("com.gmail.nossr50.api.ExperienceAPI");
                 getPowerLevelMethod = experienceAPI.getMethod("getPowerLevel", Player.class);
                 initialized = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooks: mcMMO successfully linked via Reflection!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Hooks: Failed to link mcMMO.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

@@ -22,10 +22,8 @@ public class JobsRebornHook extends MinelaunchedHook {
             try {
                 jobsClass = Class.forName("com.gamingmesh.jobs.Jobs");
                 initialized = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooks: Jobs Reborn successfully linked via Reflection!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Hooks: Failed to link Jobs Reborn.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

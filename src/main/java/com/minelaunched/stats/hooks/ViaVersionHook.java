@@ -19,10 +19,8 @@ public class ViaVersionHook extends MinelaunchedHook {
             try {
                 Class.forName("com.viaversion.viaversion.api.Via");
                 initialized = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooks: ViaVersion successfully linked!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Hooks: Failed to link ViaVersion.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

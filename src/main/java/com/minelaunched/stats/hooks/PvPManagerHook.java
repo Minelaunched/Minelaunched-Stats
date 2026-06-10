@@ -25,10 +25,8 @@ public class PvPManagerHook extends MinelaunchedHook {
                 playerHandler = getPlayerHandler.invoke(plugin);
                 getPvPPlayerMethod = playerHandler.getClass().getMethod("get", Player.class);
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into PvPManager!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into PvPManager.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

@@ -22,10 +22,8 @@ public class LuckPermsHook extends MinelaunchedHook {
             try {
                 api = LuckPermsProvider.get();
                 initialized = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooks: LuckPerms successfully linked!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Hooks: Failed to link LuckPerms.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

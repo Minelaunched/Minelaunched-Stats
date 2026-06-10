@@ -22,11 +22,9 @@ public class VaultHook extends MinelaunchedHook {
             if (rsp != null) {
                 econ = rsp.getProvider();
                 initialized = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooks: Vault Economy successfully linked!");
-            }
+                            }
         } catch (Exception e) {
-            Bukkit.getLogger().warning("[MinelaunchedStats] Hooks: Failed to link Vault Economy.");
-        }
+                    }
     }
 
     @Override

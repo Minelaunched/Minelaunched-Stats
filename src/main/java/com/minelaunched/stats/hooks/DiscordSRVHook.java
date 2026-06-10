@@ -32,10 +32,8 @@ public class DiscordSRVHook extends MinelaunchedHook {
                 
                 discordSrvApi = accountLinkManager;
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into DiscordSRV!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into DiscordSRV.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

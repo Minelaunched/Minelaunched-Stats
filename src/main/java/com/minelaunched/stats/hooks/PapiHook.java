@@ -16,8 +16,7 @@ public class PapiHook extends MinelaunchedHook {
     public void init() {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             initialized = true;
-            Bukkit.getLogger().info("[MinelaunchedStats] Hooks: PlaceholderAPI successfully linked!");
-        }
+                    }
     }
 
     @Override

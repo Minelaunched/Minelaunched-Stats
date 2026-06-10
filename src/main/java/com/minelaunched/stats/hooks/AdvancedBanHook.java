@@ -20,8 +20,7 @@ public class AdvancedBanHook extends MinelaunchedHook {
             try {
                 // We use dynamic reflection silently
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into AdvancedBan!");
-            } catch (Exception e) {
+                            } catch (Exception e) {
                 // Ignore silent fail
             }
         }

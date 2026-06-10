@@ -35,10 +35,8 @@ public class AuraSkillsHook extends MinelaunchedHook {
                 getUserMethod = apiInstance.getClass().getMethod("getUser", UUID.class);
                 
                 initialized = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooks: AuraSkills successfully linked via Reflection!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Hooks: Failed to link AuraSkills.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

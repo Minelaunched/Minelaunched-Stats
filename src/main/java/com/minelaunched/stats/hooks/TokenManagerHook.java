@@ -23,10 +23,8 @@ public class TokenManagerHook extends MinelaunchedHook {
             try {
                 getTokensMethod = tokenManagerPlugin.getClass().getMethod("getTokens", Player.class);
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into TokenManager!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into TokenManager.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

@@ -20,10 +20,8 @@ public class FloodgateHook extends MinelaunchedHook {
             try {
                 Class.forName("org.geysermc.floodgate.api.FloodgateApi");
                 initialized = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooks: Floodgate (Geyser) successfully linked!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Hooks: Failed to link Floodgate.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

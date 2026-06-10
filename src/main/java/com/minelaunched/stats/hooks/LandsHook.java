@@ -31,10 +31,8 @@ public class LandsHook extends MinelaunchedHook {
                 getLands = landPlayerClass.getMethod("getLands");
                 
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into Lands!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into Lands.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

@@ -20,10 +20,8 @@ public class TownyHook extends MinelaunchedHook {
             try {
                 townyUniverseClass = Class.forName("com.palmergames.bukkit.towny.TownyUniverse");
                 initialized = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooks: Towny successfully linked via Reflection!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Hooks: Failed to link Towny.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

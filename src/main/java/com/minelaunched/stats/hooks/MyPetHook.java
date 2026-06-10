@@ -20,8 +20,7 @@ public class MyPetHook extends MinelaunchedHook {
             try {
                 // We use dynamic reflection silently
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into MyPet!");
-            } catch (Exception e) {
+                            } catch (Exception e) {
                 // Ignore silent fail
             }
         }

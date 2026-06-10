@@ -20,8 +20,7 @@ public class MatrixHook extends MinelaunchedHook {
             try {
                 // We use dynamic reflection silently
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into Matrix!");
-            } catch (Exception e) {
+                            } catch (Exception e) {
                 // Ignore silent fail
             }
         }

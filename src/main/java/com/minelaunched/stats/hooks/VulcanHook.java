@@ -27,10 +27,8 @@ public class VulcanHook extends MinelaunchedHook {
                 getPlayerData = vulcanClass.getMethod("getPlayerData", Player.class);
                 
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into Vulcan!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into Vulcan.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

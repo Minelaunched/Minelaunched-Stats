@@ -25,10 +25,8 @@ public class CombatLogXHook extends MinelaunchedHook {
                 combatManager = getCombatManager.invoke(plugin);
                 isInCombatMethod = combatManager.getClass().getMethod("isInCombat", Player.class);
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into CombatLogX!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into CombatLogX.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

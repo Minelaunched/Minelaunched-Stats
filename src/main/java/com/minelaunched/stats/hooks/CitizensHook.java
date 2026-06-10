@@ -26,10 +26,8 @@ public class CitizensHook extends MinelaunchedHook {
                 isNPCMethod = registry.getClass().getMethod("isNPC", org.bukkit.entity.Entity.class);
                 
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into Citizens!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into Citizens.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

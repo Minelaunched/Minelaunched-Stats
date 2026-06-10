@@ -20,8 +20,7 @@ public class MarriageMasterHook extends MinelaunchedHook {
             try {
                 // We use dynamic reflection silently
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into MarriageMaster!");
-            } catch (Exception e) {
+                            } catch (Exception e) {
                 // Ignore silent fail
             }
         }

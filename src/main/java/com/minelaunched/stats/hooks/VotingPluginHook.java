@@ -29,10 +29,8 @@ public class VotingPluginHook extends MinelaunchedHook {
                 getVotingPluginUserMethod = userManagerClass.getMethod("getVotingPluginUser", java.util.UUID.class);
                 
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into VotingPlugin!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into VotingPlugin.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

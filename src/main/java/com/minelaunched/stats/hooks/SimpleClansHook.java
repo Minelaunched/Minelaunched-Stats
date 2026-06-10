@@ -26,10 +26,8 @@ public class SimpleClansHook extends MinelaunchedHook {
                 clanManager = getClanManager.invoke(plugin);
                 getClanPlayerMethod = clanManager.getClass().getMethod("getClanPlayer", Player.class);
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into SimpleClans!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into SimpleClans.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

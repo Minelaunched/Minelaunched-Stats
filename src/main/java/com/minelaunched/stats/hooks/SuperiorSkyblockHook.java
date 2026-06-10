@@ -33,10 +33,8 @@ public class SuperiorSkyblockHook extends MinelaunchedHook {
                 getNameMethod = islandClass.getMethod("getName");
                 
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into SuperiorSkyblock2!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into SuperiorSkyblock2.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

@@ -24,14 +24,15 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
         tpsTracker.runTaskTimer(this, 0L, 1L);
 
         // Initialize Plugin Hooks safely
-        com.minelaunched.stats.hooks.HookManager.initAll();
+        // Initialize Hooks after 1 tick to ensure all other plugins are loaded (eliminates the need for softdepend)
+        Bukkit.getScheduler().runTask(this, () -> {
+            com.minelaunched.stats.hooks.HookManager.initAll();
+            com.minelaunched.stats.hooks.HookManager.registerAllDefaults(getConfig());
+            getConfig().options().copyDefaults(true);
+            saveConfig();
+        });
         
-        // Register all default paths for hooks automatically
-        com.minelaunched.stats.hooks.HookManager.registerAllDefaults(getConfig());
-        
-        // Dynamically inject missing keys from the internal config.yml and hooks into the user's file
-        getConfig().options().copyDefaults(true);
-        saveConfig();
+
 
         // Initialize Web Server
         int port = getConfig().getInt("web.port", 8080);

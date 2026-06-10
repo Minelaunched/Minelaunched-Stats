@@ -34,10 +34,8 @@ public class GriefPreventionHook extends MinelaunchedHook {
                 
                 // We resolve the other methods when fetching since PlayerData class is package-private or from the return type
                 initialized = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooks: GriefPrevention successfully linked via Reflection!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Hooks: Failed to link GriefPrevention.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

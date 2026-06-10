@@ -20,10 +20,8 @@ public class CMIHook extends MinelaunchedHook {
             try {
                 cmiClass = Class.forName("com.Zrips.CMI.CMI");
                 initialized = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooks: CMI successfully linked via Reflection!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Hooks: Failed to link CMI.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

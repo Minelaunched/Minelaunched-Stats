@@ -31,10 +31,8 @@ public class BountyHuntersHook extends MinelaunchedHook {
                 getBountyMethod = bountyManager.getClass().getMethod("getBounty", org.bukkit.OfflinePlayer.class);
                 
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into BountyHunters!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into BountyHunters.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

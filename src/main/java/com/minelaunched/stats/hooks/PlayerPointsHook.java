@@ -30,10 +30,8 @@ public class PlayerPointsHook extends MinelaunchedHook {
                 lookMethod = apiInstance.getClass().getMethod("look", UUID.class);
                 
                 initialized = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooks: PlayerPoints successfully linked via Reflection!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Hooks: Failed to link PlayerPoints.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 

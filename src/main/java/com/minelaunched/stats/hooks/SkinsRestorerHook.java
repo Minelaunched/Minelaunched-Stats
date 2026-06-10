@@ -27,8 +27,7 @@ public class SkinsRestorerHook extends MinelaunchedHook {
                 skinsRestorerApi = getApi.invoke(null);
                 getSkinNameMethod = skinsRestorerApi.getClass().getMethod("getSkinName", String.class);
                 enabled = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooked into SkinsRestorer (v14)!");
-            } catch (Exception e) {
+                            } catch (Exception e) {
                 try {
                     // Support for SkinsRestorer v15 API (placeholder, might need specific v15 reflection if v14 fails)
                     Class<?> providerClass = Class.forName("net.skinsrestorer.api.SkinsRestorerProvider");
@@ -43,8 +42,7 @@ public class SkinsRestorerHook extends MinelaunchedHook {
                     // This is complex because SkinsRestorer v15 uses Optional<String>. We will just try the v14, if it fails, we abort.
                     // Let's stick to the v14 try block, most people still use it or have the legacy API wrapper enabled.
                 } catch (Exception ex) {
-                    Bukkit.getLogger().warning("[MinelaunchedStats] Failed to hook into SkinsRestorer.");
-                }
+                                    }
             }
         }
     }

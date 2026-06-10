@@ -21,10 +21,8 @@ public class EssentialsHook extends MinelaunchedHook {
             try {
                 ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
                 initialized = true;
-                Bukkit.getLogger().info("[MinelaunchedStats] Hooks: EssentialsX successfully linked!");
-            } catch (Exception e) {
-                Bukkit.getLogger().warning("[MinelaunchedStats] Hooks: Failed to link EssentialsX.");
-            }
+                            } catch (Exception e) {
+                            }
         }
     }
 
