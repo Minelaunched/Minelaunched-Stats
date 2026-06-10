@@ -28,7 +28,7 @@ Que vous souhaitiez créer un tableau de bord web personnalisé, surveiller votr
 - **🛡️ Compatibilité Universelle :** Fonctionne de la 1.8.8 aux toutes dernières versions (Spigot, Paper, Purpur, Pufferfish, Folia).
 - **⚡ Serveur Web Natif :** Héberge un serveur Web léger directement dans le plugin. Pas besoin d'Apache ou de Nginx.
 - **🌐 Bridge Redis :** Diffusez toutes les statistiques en direct sur un canal Pub/Sub Redis (Idéal pour BungeeCord/Velocity).
-- **🪄 Architecture "Zero-Touch" :** 48+ plugins tiers supportés nativement. Le fichier de configuration s'auto-génère tout seul !
+- **🪄 Architecture "Zero-Touch" :** 100+ plugins tiers supportés nativement. Le fichier de configuration s'auto-génère tout seul !
 - **🚀 Auto-Updater :** Mises à jour OTA (Over-The-Air) intégrées directement depuis les Releases GitHub.
 - **⏱️ Zéro-Lag :** La collecte des données utilise l'asynchrone et la Reflection. Le plugin ne fera jamais chuter vos TPS.
 
@@ -48,7 +48,7 @@ mindmap
       Server Stats
       Worlds & Entities
       Players (Inventory, Armor...)
-    48 API Hooks
+    100+ API Hooks
       Economy
         Vault, PlayerPoints...
       Admin
@@ -77,7 +77,7 @@ L'utilisation, la configuration, et l'intégration de ce plugin sont massives.
 Nous avons rédigé une **Documentation Officielle Exhaustive** qui détaille :
 - L'analyse complète du fichier de configuration auto-généré.
 - Le dictionnaire complet des données JSON exportées.
-- La liste complète des 48 hooks et ce qu'ils font.
+- La liste complète des 100+ hooks et ce qu'ils font.
 - Des **tutoriels avec code** (HTML/JS, Python, Node.js) pour apprendre à utiliser les données.
 - Un **Guide Développeur** complet pour créer vos propres intégrations.
 

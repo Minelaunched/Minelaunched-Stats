@@ -28,7 +28,7 @@
    - 🗺️ Mondes (Entités, Météo, Chunks, Graines)
    - 👥 Joueurs (Inventaires complets, Ping, Statistiques de jeu)
    - 🔌 Plugins (Liste, Auteurs, Versions)
-5. **[Les 48 Intégrations Tierces (Hooks)](#5-les-48-intégrations-tierces-hooks)**
+5. **[Les 100+ Intégrations Tierces (Hooks)](#5-les-100-intégrations-tierces-hooks)**
    - Économie & Monnaies
    - Rôles, Staff & Modération
    - Survie, RPG & Skyblock
@@ -152,7 +152,7 @@ hooks:
     enabled: true
     export_protocol_version: true
 ```
-Cela signifie que la configuration s'adapte automatiquement à votre serveur.
+Cela signifie que la configuration s'adapte automatiquement à votre serveur. De plus, **si vous désinstallez un plugin**, MinelaunchedStats s'en rendra compte et supprimera lui-même les anciennes configurations de votre `config.yml` pour le garder propre !
 Vous pouvez désactiver l'exportation d'une donnée spécifique en changeant `true` en `false`. Si vous mettez `export_player_balance: false`, l'argent des joueurs ne sera plus exporté, réduisant ainsi la taille du JSON et le temps de calcul.
 
 ---
@@ -204,7 +204,7 @@ Une liste de tous les plugins installés et activés sur le serveur, avec leur v
 
 ---
 
-## 5. Les 48 Intégrations Tierces (Hooks)
+## 5. Les 100+ Intégrations Tierces (Hooks)
 
 La force monumentale de MinelaunchedStats réside dans son interopérabilité avec presque tous les plugins majeurs de l'écosystème Minecraft.
 
@@ -380,7 +380,7 @@ Dans ce modèle :
 ### Le Cycle de Vie de la Configuration
 Voici ce qu'il se passe lors du `onEnable()` :
 1. Le plugin copie le `config.yml` minimaliste (sans les hooks) présent dans le `.jar`.
-2. Le `HookManager` instancie les 48 hooks en mémoire.
+2. Le `HookManager` instancie les 100+ hooks en mémoire.
 3. Le `HookManager` appelle la méthode native `registerDefaults(config)` de chaque hook. Le Hook insère ses chemins YAML directement dans la mémoire de Bukkit (via `config.addDefault()`).
 4. Le plugin exécute `config.options().copyDefaults(true)` et `saveConfig()`. Bukkit va fusionner les valeurs injectées en RAM avec celles du fichier physique !
 5. Résultat : La configuration s'auto-génère proprement en bas du fichier, sans intervention humaine.
