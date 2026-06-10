@@ -1,26 +1,40 @@
 <div align="center">
   <h1>📊 MinelaunchedStats</h1>
-  <p><b>The Ultimate, Universal Minecraft Server Statistics Exporter</b></p>
-  <p><i>Export every single piece of data from your Minecraft server in a clean, comprehensive JSON API.</i></p>
+  <p><b>L'Extracteur de Statistiques Ultime pour Serveurs Minecraft</b></p>
+  <p><i>Extrayez absolument tout depuis votre serveur sous forme d'API JSON. Compatible 1.8.8 à 1.20+</i></p>
+  
+  <br/>
+  
+  [![Version](https://img.shields.io/badge/Version-2.0-blue.svg)](#)
+  [![Spigot](https://img.shields.io/badge/Spigot-1.8.8--1.20+-orange.svg)](#)
+  [![Redis](https://img.shields.io/badge/Redis-Support-red.svg)](#)
+  [![Zero-Touch](https://img.shields.io/badge/Architecture-Zero--Touch-success.svg)](#)
+  
+  <br/>
+  
+  <h3>📚 <a href="docs.md">LIRE LA DOCUMENTATION COMPLÈTE (docs.md)</a> 📚</h3>
 </div>
 
 ---
 
-## 🌟 Overview
+## 🌟 Aperçu
 
-**MinelaunchedStats** is a high-performance, universal Bukkit plugin designed to extract an exhaustive list of statistics from your Minecraft server and expose them via a fast, built-in HTTP JSON API. 
+**MinelaunchedStats** est un plugin universel de haute performance conçu pour extraire une liste exhaustive de statistiques de votre serveur Minecraft et les exposer via une API HTTP JSON intégrée rapide ou via Redis.
 
-Whether you want to build a custom web dashboard, monitor your infrastructure, or integrate with Discord bots, this plugin gives you **unprecedented access** to your server's data without causing lag or requiring external databases.
+Que vous souhaitiez créer un tableau de bord web personnalisé, surveiller votre infrastructure, ou intégrer des bots Discord, ce plugin vous donne **un accès sans précédent** aux données de votre serveur, sans causer de lag ni nécessiter de bases de données externes.
 
-### ✨ Key Features
+### ✨ Fonctionnalités Clés
 
-- **🛡️ Universal Compatibility (1.8.8 to Latest):** Built with a unique "Safe-Wrap" architecture. It dynamically scans the server and extracts whatever data the API version supports. It works flawlessly on Spigot, Paper, Purpur, Pufferfish, and Folia without throwing `NoSuchMethodError`.
-- **⚡ Native Fast Web Server:** Hosts a lightweight JVM web server directly inside the plugin. No Apache or Nginx required.
-- **🌐 Redis Bridge:** Optionally broadcast all server stats live to a Redis Pub/Sub channel (Perfect for BungeeCord/Velocity networks).
-- **⚙️ Ultimate Customization:** Every single JSON field can be individually toggled in the `config.yml`.
-- **🚀 Auto-Updater:** Built-in OTA (Over-The-Air) updates hooked directly into GitHub Releases.
+- **🛡️ Compatibilité Universelle :** Fonctionne de la 1.8.8 aux toutes dernières versions (Spigot, Paper, Purpur, Pufferfish, Folia).
+- **⚡ Serveur Web Natif :** Héberge un serveur Web léger directement dans le plugin. Pas besoin d'Apache ou de Nginx.
+- **🌐 Bridge Redis :** Diffusez toutes les statistiques en direct sur un canal Pub/Sub Redis (Idéal pour BungeeCord/Velocity).
+- **🪄 Architecture "Zero-Touch" :** 48+ plugins tiers supportés nativement. Le fichier de configuration s'auto-génère tout seul !
+- **🚀 Auto-Updater :** Mises à jour OTA (Over-The-Air) intégrées directement depuis les Releases GitHub.
+- **⏱️ Zéro-Lag :** La collecte des données utilise l'asynchrone et la Reflection. Le plugin ne fera jamais chuter vos TPS.
 
-## 🧠 Plugin Architecture (Mind Map)
+---
+
+## 🧠 Architecture du Plugin (Mind Map)
 
 ```mermaid
 mindmap
@@ -33,215 +47,46 @@ mindmap
     Core Data
       Server Stats
       Worlds & Entities
-      Players
+      Players (Inventory, Armor...)
     48 API Hooks
       Economy
-        Vault
-        PlayerPoints
-        TokenManager
-        BountyHunters
-        Jobs Reborn
-        GemsEconomy
-        BeastTokens
+        Vault, PlayerPoints...
       Admin
-        LuckPerms
-        EssentialsX
-        CMI
-        SuperVanish
-        DiscordSRV
-        Vulcan
-        Citizens
-        SkinsRestorer
-        DeluxeTags
-        CombatLogX
-        PvPManager
-        Spartan
-        GrimAC
-        Matrix
-        LiteBans
-        AdvancedBan
+        LuckPerms, EssentialsX, CMI...
       RPG & Survival
-        AuraSkills
-        mcMMO
-        Towny
-        Lands
-        FactionsUUID
-        SuperiorSkyblock2
-        GriefPrevention
-        SimpleClans
-        BentoBox
-        IridiumSkyblock
-        GriefDefender
-        MyPet
-        Slimefun
-        Quests
-        Vampire
-        AureliumSkills
+        AuraSkills, mcMMO, Towny...
       Clients & Formats
-        ViaVersion
-        Floodgate
-        Geyser
-      Social & Misc
-        VotingPlugin
-        PlaceholderAPI
-        MarriageMaster
-        AlonsoTags
-        CrazyCrates
-        ExcellentCrates
+        ViaVersion, Floodgate, Geyser
     Smart Auto-Updater
       GitHub Releases
-      Zero-Downtime Restart
-      Auto Config Update
 ```
 
 ---
 
-## 🚀 How to Installation
+## 🚀 Installation Rapide
 
-1. Download the latest `MinelaunchedStats.jar` from the [Releases](https://github.com/Minelaunched/Minelaunched-Stats/releases) page.
-2. Place the `.jar` file into your server's `plugins` folder.
-3. Restart your server.
-4. Open the `plugins/MinelaunchedStats/config.yml` file to adjust the port, endpoint, and toggles.
-5. Access your stats by navigating to your server's IP and port in your browser (e.g., `http://<your-server-ip>:8080/`).
+1. Téléchargez le dernier `MinelaunchedStats.jar` depuis la page des [Releases](https://github.com/Minelaunched/Minelaunched-Stats/releases).
+2. Placez le `.jar` dans le dossier `plugins/` de votre serveur.
+3. Redémarrez votre serveur.
+4. Ouvrez le fichier `plugins/MinelaunchedStats/config.yml` pour ajuster le port web (par défaut : `8080`).
+5. Accédez à vos statistiques en naviguant vers l'IP et le port de votre serveur dans votre navigateur (ex: `http://votre-ip:8080/`).
 
-## ⌨️ Commands & Permissions
+## 📖 Comment utiliser ce plugin ?
 
-- `/mlstats reload` - Reloads the configuration file and restarts the internal web server without needing to reboot the entire Minecraft server.
-- **Permission:** `mlstats.admin`
+L'utilisation, la configuration, et l'intégration de ce plugin sont massives. 
+Nous avons rédigé une **Documentation Officielle Exhaustive** qui détaille :
+- L'analyse complète du fichier de configuration auto-généré.
+- Le dictionnaire complet des données JSON exportées.
+- La liste complète des 48 hooks et ce qu'ils font.
+- Des **tutoriels avec code** (HTML/JS, Python, Node.js) pour apprendre à utiliser les données.
+- Un **Guide Développeur** complet pour créer vos propres intégrations.
 
----
-
-## ⚙️ Configuration
-
-The `config.yml` is heavily documented and allows you to toggle exactly what data is exported. By disabling data you don't need, you can reduce the JSON size and save CPU cycles.
-
-```yaml
-web:
-  port: 8080
-  endpoint: "/"
-  pretty_print: false
-  cors_origin: "*"
-
-redis:
-  enabled: false
-  host: "127.0.0.1"
-  port: 6379
-  password: ""
-  channel: "minelaunched_stats"
-  update_interval_seconds: 5
-
-auto_updater:
-  enabled: true
-  github_repo: "Minelaunched/Minelaunched-Stats"
-
-stats:
-  # Contains hundreds of individual toggles for System, Server, Worlds, Players, and Plugins.
-```
+👉 **[Cliquez ici pour lire la Documentation Complète (docs.md)](docs.md)**
 
 ---
 
-## 📡 What Data is Exported?
+## 👨‍💻 Auteurs
 
-The plugin exports a massive JSON object divided into 5 main categories:
-
-### 1. 🖥️ System Stats
-Real-time monitoring of the JVM and the host machine:
-- CPU Load (Process & System), Cores Count
-- RAM Usage (Total, Free, Max, Used)
-- Disk Space
-- Thread counts, Loaded Classes, Compilation times
-- Advanced Garbage Collector statistics
-- OS Info, Java version, and Environment Variables
-
-### 2. 🌍 Server Stats
-Everything about the Bukkit/Paper instance:
-- True TPS (Ticks Per Second)
-- Max Players, Online Mode, Hardcore
-- IP, Port, MOTD
-- Ban Lists, Whitelist metrics, OP counts
-- View distance, Spawn limits, and exact Paper/Bukkit version strings
-
-### 3. 🗺️ Worlds Stats
-Granular data for every loaded dimension (Overworld, Nether, End):
-- Loaded Chunks count
-- Total Entities and Living Entities counts
-- Time, Weather, and Storm durations
-- Difficulty, Seeds, PvP status
-- Spawn Locations
-
-### 4. 👥 Players Stats
-Extensive data for every online player:
-- Health, Food, Exhaustion, Saturation, EXP, Level
-- Latency (Ping)
-- Exact Location (X, Y, Z, World) & Compass targets
-- Active Potion Effects
-- **Full Inventory & Armor Dump:** Slot numbers, Material types, amounts, durability, and custom item names.
-- **Game Statistics:** A massive dump of all native Minecraft statistics (blocks broken, distance walked, kills, deaths, etc.).
-
-### 5. 🔌 Plugins
-A list of all installed plugins, including:
-- Name, Version, Enabled Status
-- Authors, Descriptions, and Website links
-
----
-
-## 🔗 3rd Party API Hooks
-
-To make MinelaunchedStats truly universal, we have implemented completely safe, modular integrations with the biggest plugins in Minecraft. If you don't have them installed, the plugin ignores them gracefully without crashing:
-
-- **Vault:** Exports the exact balance of each player, and calculates the total server economy (GDP) for inflation tracking.
-- **PlayerPoints:** Exports the exact balance of premium currency (gems, points) for each player.
-- **PlaceholderAPI:** Allows you to translate ANY custom placeholder strings globally (e.g. `%server_uptime%`) or per-player (e.g. `%player_ping%`).
-- **LuckPerms:** Exports the Primary Group (Rank), Prefix, and Suffix of each online player.
-- **EssentialsX:** Exports real-time status attributes: `is_afk`, `is_vanished`, `is_god_mode`, `is_muted`, and `nickname`.
-- **CMI:** The Premium alternative to Essentials. Exports `is_afk`, `is_vanished`, and `is_god_mode`.
-- **GriefPrevention:** Exports the accrued `claim_blocks` and `bonus_blocks` of players.
-- **Towny (TownyAdvanced):** Exports `town`, `nation`, and `title` of the player for geopolitical servers.
-- **Lands:** Exports the exact number of lands claimed by the player.
-- **FactionsUUID:** Exports the `name` and `role` of the player's faction.
-- **Jobs Reborn:** Exports a list of all active `jobs` and their `level` for each player.
-- **ViaVersion:** Exports the exact Minecraft client protocol version of each player (e.g. 1.20.4).
-- **Floodgate (Geyser):** Automatically tags players as Java or Bedrock and exports their device platform (Xbox, iOS, Android).
-- **mcMMO:** Exports the RPG `power_level` of players to track their progress.
-- **AuraSkills (AureliumSkills):** Exports the live `mana` and global `power_level` of players.
-- **DiscordSRV:** Exports the linked `discord_id` of the player.
-- **Vulcan AntiCheat:** Exports the exact number of cheat `violations` of the player.
-- **SuperVanish / PremiumVanish:** Exports the true `is_vanished` state of staff members, bypassing fake plugins.
-- **SuperiorSkyblock2:** Exports the `island_level` and `island_name` of the player.
-- **DeluxeTags / AlonsoTags:** Exports the `active_tag` (chat prefix) of the player.
-- **SkinsRestorer:** Exports the `skin_name` worn by cracked players.
-- **CombatLogX / PvPManager:** Exports a boolean `is_in_combat` if the player is currently in PvP.
-- **TokenManager / GemsEconomy / BeastTokens:** Exports the custom currency balance of the player.
-- **SimpleClans:** Exports the `clan_name` and `clan_tag`.
-- **VotingPlugin:** Exports the `total_votes` of the player.
-- **BountyHunters:** Exports the active `bounty_reward` on the player's head.
-- **Citizens:** Detects if the entity is an NPC (`is_npc`). Crucial for web dashboards to filter out fake players.
-- **BentoBox / IridiumSkyblock:** Exports `island_level` and `island_name`.
-- **GriefDefender:** Exports the `claims_count`.
-- **Spartan / GrimAC / Matrix:** Exports anti-cheat `violations` and `alerts`.
-- **MarriageMaster:** Exports the `partner_name` of the player.
-- **MyPet:** Exports the `pet_name` and `pet_level`.
-- **Slimefun:** Exports the number of `researches` unlocked.
-- **Quests:** Exports the number of `completed_quests`.
-- **Vampire:** Exports a boolean `is_vampire`.
-- **CrazyCrates / ExcellentCrates:** Exports the number of virtual `keys`.
-- **GeyserMC:** Detects if the player is a Bedrock player (`is_bedrock`).
-- **LiteBans / AdvancedBan:** Detects if the player is currently banned globally (`is_banned`).
-
-> **💡 Granular Control:** Every single exported property from these APIs can be individually disabled in `config.yml`. Don't want the nickname from Essentials? Set `export_nickname: false`.
-
----
-
-## 🔄 Auto-Updater & CI/CD
-
-**MinelaunchedStats** ships with a smart auto-updater. On startup, it checks GitHub for new releases. If an update is found, it automatically downloads the `.jar` to the `plugins/update/` folder. The update is applied seamlessly on the next server restart.
-
-The repository also features **GitHub Actions CI/CD**. Pushing a tag like `v1.0.1` automatically compiles the code and publishes a new Release.
-
----
-
-## 👨‍💻 Authors
-
-Developed with ❤️ by:
+Développé avec ❤️ par :
 - **NeXoS_20**
 - **Minelaunched**
