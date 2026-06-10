@@ -409,6 +409,36 @@ public class StatsCollector implements Callable<JsonObject> {
                     if (jobsData != null) po.add("jobsreborn", jobsData);
                 }
 
+                if (config.getBoolean("hooks.discordsrv.enabled", true) && config.getBoolean("hooks.discordsrv.export_discord_id", true) && com.minelaunched.stats.hooks.DiscordSRVHook.isEnabled()) {
+                    String discordId = com.minelaunched.stats.hooks.DiscordSRVHook.getDiscordId(p);
+                    if (discordId != null) po.addProperty("discord_id", discordId);
+                }
+
+                if (config.getBoolean("hooks.vulcan.enabled", true) && config.getBoolean("hooks.vulcan.export_violations", true) && com.minelaunched.stats.hooks.VulcanHook.isEnabled()) {
+                    po.addProperty("vulcan_violations", com.minelaunched.stats.hooks.VulcanHook.getViolations(p));
+                }
+
+                if (config.getBoolean("hooks.supervanish.enabled", true) && config.getBoolean("hooks.supervanish.export_is_vanished", true) && com.minelaunched.stats.hooks.SuperVanishHook.isEnabled()) {
+                    po.addProperty("is_supervanished", com.minelaunched.stats.hooks.SuperVanishHook.isVanished(p));
+                }
+
+                if (config.getBoolean("hooks.lands.enabled", true) && config.getBoolean("hooks.lands.export_lands_count", true) && com.minelaunched.stats.hooks.LandsHook.isEnabled()) {
+                    po.addProperty("lands_count", com.minelaunched.stats.hooks.LandsHook.getLandsCount(p));
+                }
+
+                if (config.getBoolean("hooks.factionsuuid.enabled", true) && com.minelaunched.stats.hooks.FactionsHook.isEnabled()) {
+                    JsonObject factionsData = new JsonObject();
+                    if (config.getBoolean("hooks.factionsuuid.export_faction_name", true)) {
+                        String fName = com.minelaunched.stats.hooks.FactionsHook.getFactionName(p);
+                        if (fName != null) factionsData.addProperty("name", fName);
+                    }
+                    if (config.getBoolean("hooks.factionsuuid.export_faction_role", true)) {
+                        String fRole = com.minelaunched.stats.hooks.FactionsHook.getFactionRole(p);
+                        if (fRole != null) factionsData.addProperty("role", fRole);
+                    }
+                    if (factionsData.size() > 0) po.add("factions", factionsData);
+                }
+
                 if (config.getBoolean(cp + ".potion_effects", true)) {
                     JsonArray effects = new JsonArray();
                     for (PotionEffect effect : p.getActivePotionEffects()) {

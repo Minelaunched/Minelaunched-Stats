@@ -16,6 +16,7 @@ Whether you want to build a custom web dashboard, monitor your infrastructure, o
 
 - **🛡️ Universal Compatibility (1.8.8 to Latest):** Built with a unique "Safe-Wrap" architecture. It dynamically scans the server and extracts whatever data the API version supports. It works flawlessly on Spigot, Paper, Purpur, Pufferfish, and Folia without throwing `NoSuchMethodError`.
 - **⚡ Native Fast Web Server:** Hosts a lightweight JVM web server directly inside the plugin. No Apache or Nginx required.
+- **🌐 Redis Bridge:** Optionally broadcast all server stats live to a Redis Pub/Sub channel (Perfect for BungeeCord/Velocity networks).
 - **⚙️ Ultimate Customization:** Every single JSON field can be individually toggled in the `config.yml`.
 - **🚀 Auto-Updater:** Built-in OTA (Over-The-Air) updates hooked directly into GitHub Releases.
 
@@ -26,11 +27,14 @@ mindmap
   root((MinelaunchedStats))
     HTTP Web Server
       JSON Endpoints
+    Redis Bridge
+      Pub/Sub Broadcasts
+      Cross-Server Sync
     Core Data
       Server Stats
       Worlds & Entities
       System (RAM, CPU, Disk)
-    13 API Hooks
+    18 API Hooks
       Economy
         Vault
         PlayerPoints
@@ -39,6 +43,9 @@ mindmap
         LuckPerms
         EssentialsX
         CMI
+        SuperVanish
+        DiscordSRV
+        Vulcan
       RPG & Survival
         AuraSkills
         mcMMO
@@ -81,6 +88,14 @@ web:
   endpoint: "/"
   pretty_print: false
   cors_origin: "*"
+
+redis:
+  enabled: false
+  host: "127.0.0.1"
+  port: 6379
+  password: ""
+  channel: "minelaunched_stats"
+  update_interval_seconds: 5
 
 auto_updater:
   enabled: true
@@ -149,11 +164,16 @@ To make MinelaunchedStats truly universal, we have implemented completely safe, 
 - **CMI:** The Premium alternative to Essentials. Exports `is_afk`, `is_vanished`, and `is_god_mode`.
 - **GriefPrevention:** Exports the accrued `claim_blocks` and `bonus_blocks` of players.
 - **Towny (TownyAdvanced):** Exports `town`, `nation`, and `title` of the player for geopolitical servers.
+- **Lands:** Exports the exact number of lands claimed by the player.
+- **FactionsUUID:** Exports the `name` and `role` of the player's faction.
 - **Jobs Reborn:** Exports a list of all active `jobs` and their `level` for each player.
 - **ViaVersion:** Exports the exact Minecraft client protocol version of each player (e.g. 1.20.4).
 - **Floodgate (Geyser):** Automatically tags players as Java or Bedrock and exports their device platform (Xbox, iOS, Android).
 - **mcMMO:** Exports the RPG `power_level` of players to track their progress.
 - **AuraSkills (AureliumSkills):** Exports the live `mana` and global `power_level` of players.
+- **DiscordSRV:** Exports the linked `discord_id` of the player.
+- **Vulcan AntiCheat:** Exports the exact number of cheat `violations` of the player.
+- **SuperVanish / PremiumVanish:** Exports the true `is_vanished` state of staff members, bypassing fake plugins.
 
 > **💡 Granular Control:** Every single exported property from these APIs can be individually disabled in `config.yml`. Don't want the nickname from Essentials? Set `export_nickname: false`.
 

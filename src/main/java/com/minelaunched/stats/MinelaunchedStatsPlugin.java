@@ -11,6 +11,7 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
 
     private WebServer webServer;
     private TpsTracker tpsTracker;
+    private RedisManager redisManager;
 
     @Override
     public void onEnable() {
@@ -36,6 +37,11 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
         com.minelaunched.stats.hooks.TownyHook.init();
         com.minelaunched.stats.hooks.JobsRebornHook.init();
         com.minelaunched.stats.hooks.CMIHook.init();
+        com.minelaunched.stats.hooks.DiscordSRVHook.init();
+        com.minelaunched.stats.hooks.VulcanHook.init();
+        com.minelaunched.stats.hooks.SuperVanishHook.init();
+        com.minelaunched.stats.hooks.LandsHook.init();
+        com.minelaunched.stats.hooks.FactionsHook.init();
 
         // Initialize Web Server
         int port = getConfig().getInt("web.port", 8080);
@@ -50,6 +56,15 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
         // Auto Updater
         new AutoUpdater(this).checkForUpdates();
 
+        // Redis
+        if (getConfig().getBoolean("redis.enabled", false)) {
+            try {
+                redisManager = new RedisManager(this);
+            } catch (Exception e) {
+                getLogger().severe("Failed to connect to Redis: " + e.getMessage());
+            }
+        }
+
         getLogger().info("MinelaunchedStats enabled and listening on port " + port + "!");
     }
 
@@ -60,6 +75,9 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
         }
         if (tpsTracker != null) {
             tpsTracker.cancel();
+        }
+        if (redisManager != null) {
+            redisManager.stop();
         }
         getLogger().info("MinelaunchedStats disabled!");
     }
@@ -155,6 +173,11 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
         if (tpsTracker != null) {
             tpsTracker.cancel();
         }
+        // Stop Redis
+        if (redisManager != null) {
+            redisManager.stop();
+            redisManager = null;
+        }
         
         // Reload config
         reloadConfig();
@@ -173,6 +196,15 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
             webServer.start();
         } catch (Exception e) {
             getLogger().severe("Failed to restart web server on port " + port);
+        }
+        
+        // Restart Redis
+        if (getConfig().getBoolean("redis.enabled", false)) {
+            try {
+                redisManager = new RedisManager(this);
+            } catch (Exception e) {
+                getLogger().severe("Failed to reconnect to Redis: " + e.getMessage());
+            }
         }
         
         getLogger().info("MinelaunchedStats config and server reloaded.");

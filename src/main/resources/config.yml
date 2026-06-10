@@ -12,6 +12,16 @@ auto_updater:
   # Automatically restarts the server (via /restart) when an update is downloaded AND there are 0 players online.
   smart_restart: true
 
+redis:
+  enabled: false
+  host: "127.0.0.1"
+  port: 6379
+  password: ""
+  # The Pub/Sub channel to broadcast the JSON stats to
+  channel: "minelaunched_stats"
+  # How often (in seconds) to publish stats to Redis
+  update_interval_seconds: 5
+
 hooks:
   vault:
     enabled: true
@@ -83,6 +93,27 @@ hooks:
   jobsreborn:
     enabled: true
     export_jobs_list: true
+
+  discordsrv:
+    enabled: true
+    export_discord_id: true
+
+  vulcan:
+    enabled: true
+    export_violations: true
+
+  supervanish:
+    enabled: true
+    export_is_vanished: true
+
+  lands:
+    enabled: true
+    export_lands_count: true
+
+  factionsuuid:
+    enabled: true
+    export_faction_name: true
+    export_faction_role: true
 
 # Toggle EVERY single statistic individually. Set to false to disable.
 stats:
