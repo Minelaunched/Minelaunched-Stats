@@ -78,13 +78,6 @@ public class WorldCollector {
         }
 
         
-        // The block puts its result into rootSubstitute under a key (e.g. "system"). 
-        // We just return that element.
-        if (rootSubstitute.has("world")) return rootSubstitute.getAsJsonObject("world");
-        if (rootSubstitute.has("online_players")) return rootSubstitute; // Quick hack for players since playersData is what we want... wait, "players" is the key.
-        if (rootSubstitute.has("worlds")) return rootSubstitute.getAsJsonArray("worlds") != null ? new JsonObject() : new JsonObject();
-        
-        // Actually, let's just return the rootSubstitute, and let StatsCollector combine them via addAll.
         return rootSubstitute;
     }
 }

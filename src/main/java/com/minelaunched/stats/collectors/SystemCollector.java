@@ -91,13 +91,6 @@ public class SystemCollector {
         }
 
         
-        // The block puts its result into rootSubstitute under a key (e.g. "system"). 
-        // We just return that element.
-        if (rootSubstitute.has("system")) return rootSubstitute.getAsJsonObject("system");
-        if (rootSubstitute.has("online_players")) return rootSubstitute; // Quick hack for players since playersData is what we want... wait, "players" is the key.
-        if (rootSubstitute.has("systems")) return rootSubstitute.getAsJsonArray("systems") != null ? new JsonObject() : new JsonObject();
-        
-        // Actually, let's just return the rootSubstitute, and let StatsCollector combine them via addAll.
         return rootSubstitute;
     }
 }
