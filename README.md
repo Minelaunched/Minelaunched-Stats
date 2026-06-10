@@ -1,11 +1,11 @@
 <div align="center">
   <h1>📊 MinelaunchedStats</h1>
   <p><b>L'Extracteur de Statistiques Ultime pour Serveurs Minecraft</b></p>
-  <p><i>Extrayez absolument tout depuis votre serveur sous forme d'API JSON. Compatible 1.8.8 à 1.20+</i></p>
+  <p><i>Extrayez absolument tout depuis votre serveur sous forme d'API JSON. Compatible 1.8.8 à 26.1.+</i></p>
   
   <br/>
   
-  [![Version](https://img.shields.io/badge/Version-1.1.0-blue.svg)](#)
+  [![Version](https://img.shields.io/badge/Version-1.1.2-blue.svg)](#)
   [![Spigot](https://img.shields.io/badge/Spigot-1.8.8--26.1.+-orange.svg)](#)
   [![Redis](https://img.shields.io/badge/Redis-Support-red.svg)](#)
   [![Zero-Touch](https://img.shields.io/badge/Architecture-Zero--Touch-success.svg)](#)
