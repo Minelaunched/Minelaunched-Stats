@@ -34,13 +34,15 @@ mindmap
       Server Stats
       Worlds & Entities
       Players
-    28 API Hooks
+    48 API Hooks
       Economy
         Vault
         PlayerPoints
         TokenManager
         BountyHunters
         Jobs Reborn
+        GemsEconomy
+        BeastTokens
       Admin
         LuckPerms
         EssentialsX
@@ -53,6 +55,11 @@ mindmap
         DeluxeTags
         CombatLogX
         PvPManager
+        Spartan
+        GrimAC
+        Matrix
+        LiteBans
+        AdvancedBan
       RPG & Survival
         AuraSkills
         mcMMO
@@ -62,12 +69,25 @@ mindmap
         SuperiorSkyblock2
         GriefPrevention
         SimpleClans
+        BentoBox
+        IridiumSkyblock
+        GriefDefender
+        MyPet
+        Slimefun
+        Quests
+        Vampire
+        AureliumSkills
       Clients & Formats
         ViaVersion
         Floodgate
+        Geyser
       Social & Misc
         VotingPlugin
         PlaceholderAPI
+        MarriageMaster
+        AlonsoTags
+        CrazyCrates
+        ExcellentCrates
     Smart Auto-Updater
       GitHub Releases
       Zero-Downtime Restart
@@ -188,15 +208,25 @@ To make MinelaunchedStats truly universal, we have implemented completely safe, 
 - **Vulcan AntiCheat:** Exports the exact number of cheat `violations` of the player.
 - **SuperVanish / PremiumVanish:** Exports the true `is_vanished` state of staff members, bypassing fake plugins.
 - **SuperiorSkyblock2:** Exports the `island_level` and `island_name` of the player.
-- **DeluxeTags:** Exports the `active_tag` (chat prefix) of the player.
+- **DeluxeTags / AlonsoTags:** Exports the `active_tag` (chat prefix) of the player.
 - **SkinsRestorer:** Exports the `skin_name` worn by cracked players.
-- **CombatLogX:** Exports a boolean `is_in_combat` if the player is currently in PvP.
-- **PvPManager:** Exports `is_in_combat` and `has_pvp_enabled`.
-- **TokenManager:** Exports the `tokens` balance of the player.
+- **CombatLogX / PvPManager:** Exports a boolean `is_in_combat` if the player is currently in PvP.
+- **TokenManager / GemsEconomy / BeastTokens:** Exports the custom currency balance of the player.
 - **SimpleClans:** Exports the `clan_name` and `clan_tag`.
 - **VotingPlugin:** Exports the `total_votes` of the player.
 - **BountyHunters:** Exports the active `bounty_reward` on the player's head.
 - **Citizens:** Detects if the entity is an NPC (`is_npc`). Crucial for web dashboards to filter out fake players.
+- **BentoBox / IridiumSkyblock:** Exports `island_level` and `island_name`.
+- **GriefDefender:** Exports the `claims_count`.
+- **Spartan / GrimAC / Matrix:** Exports anti-cheat `violations` and `alerts`.
+- **MarriageMaster:** Exports the `partner_name` of the player.
+- **MyPet:** Exports the `pet_name` and `pet_level`.
+- **Slimefun:** Exports the number of `researches` unlocked.
+- **Quests:** Exports the number of `completed_quests`.
+- **Vampire:** Exports a boolean `is_vampire`.
+- **CrazyCrates / ExcellentCrates:** Exports the number of virtual `keys`.
+- **GeyserMC:** Detects if the player is a Bedrock player (`is_bedrock`).
+- **LiteBans / AdvancedBan:** Detects if the player is currently banned globally (`is_banned`).
 
 > **💡 Granular Control:** Every single exported property from these APIs can be individually disabled in `config.yml`. Don't want the nickname from Essentials? Set `export_nickname: false`.
 

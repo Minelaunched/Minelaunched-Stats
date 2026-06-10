@@ -494,6 +494,127 @@ public class StatsCollector implements Callable<JsonObject> {
                     po.addProperty("bounty_reward", com.minelaunched.stats.hooks.BountyHuntersHook.getBountyReward(p));
                 }
 
+                if (config.getBoolean("hooks.bentobox.enabled", true) && config.getBoolean("hooks.bentobox.export_island_level", true) && com.minelaunched.stats.hooks.BentoBoxHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.BentoBoxHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("island_level", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("island_level", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("island_level", (String) val);
+                }
+                if (config.getBoolean("hooks.iridiumskyblock.enabled", true) && config.getBoolean("hooks.iridiumskyblock.export_island", true) && com.minelaunched.stats.hooks.IridiumSkyblockHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.IridiumSkyblockHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("has_island", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("has_island", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("has_island", (String) val);
+                }
+                if (config.getBoolean("hooks.griefdefender.enabled", true) && config.getBoolean("hooks.griefdefender.export_claims", true) && com.minelaunched.stats.hooks.GriefDefenderHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.GriefDefenderHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("claims_count", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("claims_count", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("claims_count", (String) val);
+                }
+                if (config.getBoolean("hooks.spartan.enabled", true) && config.getBoolean("hooks.spartan.export_violations", true) && com.minelaunched.stats.hooks.SpartanHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.SpartanHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("spartan_violations", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("spartan_violations", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("spartan_violations", (String) val);
+                }
+                if (config.getBoolean("hooks.grimac.enabled", true) && config.getBoolean("hooks.grimac.export_alerts", true) && com.minelaunched.stats.hooks.GrimACHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.GrimACHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("grim_alerts", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("grim_alerts", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("grim_alerts", (String) val);
+                }
+                if (config.getBoolean("hooks.matrix.enabled", true) && config.getBoolean("hooks.matrix.export_violations", true) && com.minelaunched.stats.hooks.MatrixHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.MatrixHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("matrix_violations", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("matrix_violations", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("matrix_violations", (String) val);
+                }
+                if (config.getBoolean("hooks.gemseconomy.enabled", true) && config.getBoolean("hooks.gemseconomy.export_balance", true) && com.minelaunched.stats.hooks.GemsEconomyHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.GemsEconomyHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("gems_balance", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("gems_balance", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("gems_balance", (String) val);
+                }
+                if (config.getBoolean("hooks.beasttokens.enabled", true) && config.getBoolean("hooks.beasttokens.export_tokens", true) && com.minelaunched.stats.hooks.BeastTokensHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.BeastTokensHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("beast_tokens", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("beast_tokens", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("beast_tokens", (String) val);
+                }
+                if (config.getBoolean("hooks.alonsotags.enabled", true) && config.getBoolean("hooks.alonsotags.export_tag", true) && com.minelaunched.stats.hooks.AlonsoTagsHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.AlonsoTagsHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("alonso_tag", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("alonso_tag", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("alonso_tag", (String) val);
+                }
+                if (config.getBoolean("hooks.marriagemaster.enabled", true) && config.getBoolean("hooks.marriagemaster.export_partner", true) && com.minelaunched.stats.hooks.MarriageMasterHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.MarriageMasterHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("partner_name", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("partner_name", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("partner_name", (String) val);
+                }
+                if (config.getBoolean("hooks.mypet.enabled", true) && config.getBoolean("hooks.mypet.export_pet_name", true) && com.minelaunched.stats.hooks.MyPetHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.MyPetHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("pet_name", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("pet_name", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("pet_name", (String) val);
+                }
+                if (config.getBoolean("hooks.slimefun.enabled", true) && config.getBoolean("hooks.slimefun.export_researches", true) && com.minelaunched.stats.hooks.SlimefunHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.SlimefunHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("slimefun_researches", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("slimefun_researches", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("slimefun_researches", (String) val);
+                }
+                if (config.getBoolean("hooks.quests.enabled", true) && config.getBoolean("hooks.quests.export_completed_quests", true) && com.minelaunched.stats.hooks.QuestsHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.QuestsHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("completed_quests", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("completed_quests", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("completed_quests", (String) val);
+                }
+                if (config.getBoolean("hooks.vampire.enabled", true) && config.getBoolean("hooks.vampire.export_is_vampire", true) && com.minelaunched.stats.hooks.VampireHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.VampireHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("is_vampire", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("is_vampire", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("is_vampire", (String) val);
+                }
+                if (config.getBoolean("hooks.aureliumskills.enabled", true) && config.getBoolean("hooks.aureliumskills.export_power_level", true) && com.minelaunched.stats.hooks.AureliumSkillsHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.AureliumSkillsHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("power_level", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("power_level", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("power_level", (String) val);
+                }
+                if (config.getBoolean("hooks.crazycrates.enabled", true) && config.getBoolean("hooks.crazycrates.export_keys", true) && com.minelaunched.stats.hooks.CrazyCratesHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.CrazyCratesHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("crazy_keys", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("crazy_keys", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("crazy_keys", (String) val);
+                }
+                if (config.getBoolean("hooks.excellentcrates.enabled", true) && config.getBoolean("hooks.excellentcrates.export_keys", true) && com.minelaunched.stats.hooks.ExcellentCratesHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.ExcellentCratesHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("excellent_keys", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("excellent_keys", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("excellent_keys", (String) val);
+                }
+                if (config.getBoolean("hooks.geyser.enabled", true) && config.getBoolean("hooks.geyser.export_is_bedrock", true) && com.minelaunched.stats.hooks.GeyserHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.GeyserHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("is_bedrock", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("is_bedrock", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("is_bedrock", (String) val);
+                }
+                if (config.getBoolean("hooks.litebans.enabled", true) && config.getBoolean("hooks.litebans.export_is_banned", true) && com.minelaunched.stats.hooks.LiteBansHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.LiteBansHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("is_banned", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("is_banned", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("is_banned", (String) val);
+                }
+                if (config.getBoolean("hooks.advancedban.enabled", true) && config.getBoolean("hooks.advancedban.export_is_banned", true) && com.minelaunched.stats.hooks.AdvancedBanHook.isEnabled()) {
+                    Object val = com.minelaunched.stats.hooks.AdvancedBanHook.getStats(p);
+                    if (val instanceof Number) po.addProperty("is_banned", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("is_banned", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("is_banned", (String) val);
+                }
+
                 if (config.getBoolean(cp + ".potion_effects", true)) {
                     JsonArray effects = new JsonArray();
                     for (PotionEffect effect : p.getActivePotionEffects()) {

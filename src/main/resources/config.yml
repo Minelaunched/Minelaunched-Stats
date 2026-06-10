@@ -158,6 +158,86 @@ hooks:
     enabled: true
     export_bounty_reward: true
 
+  bentobox:
+    enabled: true
+    export_island_level: true
+
+  iridiumskyblock:
+    enabled: true
+    export_island: true
+
+  griefdefender:
+    enabled: true
+    export_claims: true
+
+  spartan:
+    enabled: true
+    export_violations: true
+
+  grimac:
+    enabled: true
+    export_alerts: true
+
+  matrix:
+    enabled: true
+    export_violations: true
+
+  gemseconomy:
+    enabled: true
+    export_balance: true
+
+  beasttokens:
+    enabled: true
+    export_tokens: true
+
+  alonsotags:
+    enabled: true
+    export_tag: true
+
+  marriagemaster:
+    enabled: true
+    export_partner: true
+
+  mypet:
+    enabled: true
+    export_pet_name: true
+
+  slimefun:
+    enabled: true
+    export_researches: true
+
+  quests:
+    enabled: true
+    export_completed_quests: true
+
+  vampire:
+    enabled: true
+    export_is_vampire: true
+
+  aureliumskills:
+    enabled: true
+    export_power_level: true
+
+  crazycrates:
+    enabled: true
+    export_keys: true
+
+  excellentcrates:
+    enabled: true
+    export_keys: true
+
+  geyser:
+    enabled: true
+    export_is_bedrock: true
+
+  litebans:
+    enabled: true
+    export_is_banned: true
+
+  advancedban:
+    enabled: true
+    export_is_banned: true
+
 # Toggle EVERY single statistic individually. Set to false to disable.
 stats:
   system:

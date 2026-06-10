@@ -53,6 +53,27 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
         com.minelaunched.stats.hooks.VotingPluginHook.init();
         com.minelaunched.stats.hooks.BountyHuntersHook.init();
 
+        com.minelaunched.stats.hooks.BentoBoxHook.init();
+        com.minelaunched.stats.hooks.IridiumSkyblockHook.init();
+        com.minelaunched.stats.hooks.GriefDefenderHook.init();
+        com.minelaunched.stats.hooks.SpartanHook.init();
+        com.minelaunched.stats.hooks.GrimACHook.init();
+        com.minelaunched.stats.hooks.MatrixHook.init();
+        com.minelaunched.stats.hooks.GemsEconomyHook.init();
+        com.minelaunched.stats.hooks.BeastTokensHook.init();
+        com.minelaunched.stats.hooks.AlonsoTagsHook.init();
+        com.minelaunched.stats.hooks.MarriageMasterHook.init();
+        com.minelaunched.stats.hooks.MyPetHook.init();
+        com.minelaunched.stats.hooks.SlimefunHook.init();
+        com.minelaunched.stats.hooks.QuestsHook.init();
+        com.minelaunched.stats.hooks.VampireHook.init();
+        com.minelaunched.stats.hooks.AureliumSkillsHook.init();
+        com.minelaunched.stats.hooks.CrazyCratesHook.init();
+        com.minelaunched.stats.hooks.ExcellentCratesHook.init();
+        com.minelaunched.stats.hooks.GeyserHook.init();
+        com.minelaunched.stats.hooks.LiteBansHook.init();
+        com.minelaunched.stats.hooks.AdvancedBanHook.init();
+
         // Initialize Web Server
         int port = getConfig().getInt("web.port", 8080);
         webServer = new WebServer(this, port);
