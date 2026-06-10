@@ -33,8 +33,8 @@ mindmap
     Core Data
       Server Stats
       Worlds & Entities
-      System (RAM, CPU, Disk)
-    18 API Hooks
+      Players
+    23 API Hooks
       Economy
         Vault
         PlayerPoints
@@ -46,10 +46,17 @@ mindmap
         SuperVanish
         DiscordSRV
         Vulcan
+        Citizens
+        SkinsRestorer
+        DeluxeTags
+        CombatLogX
       RPG & Survival
         AuraSkills
         mcMMO
         Towny
+        Lands
+        FactionsUUID
+        SuperiorSkyblock2
         GriefPrevention
       Clients & Formats
         ViaVersion
@@ -174,6 +181,11 @@ To make MinelaunchedStats truly universal, we have implemented completely safe, 
 - **DiscordSRV:** Exports the linked `discord_id` of the player.
 - **Vulcan AntiCheat:** Exports the exact number of cheat `violations` of the player.
 - **SuperVanish / PremiumVanish:** Exports the true `is_vanished` state of staff members, bypassing fake plugins.
+- **SuperiorSkyblock2:** Exports the `island_level` and `island_name` of the player.
+- **DeluxeTags:** Exports the `active_tag` (chat prefix) of the player.
+- **SkinsRestorer:** Exports the `skin_name` worn by cracked players.
+- **CombatLogX:** Exports a boolean `is_in_combat` if the player is currently in PvP.
+- **Citizens:** Detects if the entity is an NPC (`is_npc`). Crucial for web dashboards to filter out fake players.
 
 > **💡 Granular Control:** Every single exported property from these APIs can be individually disabled in `config.yml`. Don't want the nickname from Essentials? Set `export_nickname: false`.
 

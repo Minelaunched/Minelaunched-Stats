@@ -439,6 +439,34 @@ public class StatsCollector implements Callable<JsonObject> {
                     if (factionsData.size() > 0) po.add("factions", factionsData);
                 }
 
+                if (config.getBoolean("hooks.combatlogx.enabled", true) && config.getBoolean("hooks.combatlogx.export_is_in_combat", true) && com.minelaunched.stats.hooks.CombatLogXHook.isEnabled()) {
+                    po.addProperty("is_in_combat", com.minelaunched.stats.hooks.CombatLogXHook.isInCombat(p));
+                }
+
+                if (config.getBoolean("hooks.superiorskyblock2.enabled", true) && com.minelaunched.stats.hooks.SuperiorSkyblockHook.isEnabled()) {
+                    JsonObject ssData = com.minelaunched.stats.hooks.SuperiorSkyblockHook.getPlayerData(p);
+                    if (ssData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.superiorskyblock2.export_island_level", true) && ssData.has("island_level")) filtered.add("island_level", ssData.get("island_level"));
+                        if (config.getBoolean("hooks.superiorskyblock2.export_island_name", true) && ssData.has("island_name")) filtered.add("island_name", ssData.get("island_name"));
+                        if (filtered.size() > 0) po.add("superiorskyblock2", filtered);
+                    }
+                }
+
+                if (config.getBoolean("hooks.deluxetags.enabled", true) && config.getBoolean("hooks.deluxetags.export_active_tag", true) && com.minelaunched.stats.hooks.DeluxeTagsHook.isEnabled()) {
+                    String activeTag = com.minelaunched.stats.hooks.DeluxeTagsHook.getActiveTag(p);
+                    if (activeTag != null) po.addProperty("active_tag", activeTag);
+                }
+
+                if (config.getBoolean("hooks.skinsrestorer.enabled", true) && config.getBoolean("hooks.skinsrestorer.export_skin_name", true) && com.minelaunched.stats.hooks.SkinsRestorerHook.isEnabled()) {
+                    String skinName = com.minelaunched.stats.hooks.SkinsRestorerHook.getSkinName(p);
+                    if (skinName != null) po.addProperty("skin_name", skinName);
+                }
+
+                if (config.getBoolean("hooks.citizens.enabled", true) && config.getBoolean("hooks.citizens.export_is_npc", true) && com.minelaunched.stats.hooks.CitizensHook.isEnabled()) {
+                    po.addProperty("is_npc", com.minelaunched.stats.hooks.CitizensHook.isNPC(p));
+                }
+
                 if (config.getBoolean(cp + ".potion_effects", true)) {
                     JsonArray effects = new JsonArray();
                     for (PotionEffect effect : p.getActivePotionEffects()) {

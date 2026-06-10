@@ -115,6 +115,27 @@ hooks:
     export_faction_name: true
     export_faction_role: true
 
+  combatlogx:
+    enabled: true
+    export_is_in_combat: true
+
+  superiorskyblock2:
+    enabled: true
+    export_island_level: true
+    export_island_name: true
+
+  deluxetags:
+    enabled: true
+    export_active_tag: true
+
+  skinsrestorer:
+    enabled: true
+    export_skin_name: true
+
+  citizens:
+    enabled: true
+    export_is_npc: true
+
 # Toggle EVERY single statistic individually. Set to false to disable.
 stats:
   system:
