@@ -5,8 +5,8 @@
   
   <br/>
   
-  [![Version](https://img.shields.io/badge/Version-2.0-blue.svg)](#)
-  [![Spigot](https://img.shields.io/badge/Spigot-1.8.8--1.20+-orange.svg)](#)
+  [![Version](https://img.shields.io/badge/Version-1.1.0-blue.svg)](#)
+  [![Spigot](https://img.shields.io/badge/Spigot-1.8.8--26.1.+-orange.svg)](#)
   [![Redis](https://img.shields.io/badge/Redis-Support-red.svg)](#)
   [![Zero-Touch](https://img.shields.io/badge/Architecture-Zero--Touch-success.svg)](#)
   
