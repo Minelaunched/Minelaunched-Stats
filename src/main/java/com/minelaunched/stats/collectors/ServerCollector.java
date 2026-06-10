@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.BanList;
-import com.minelaunched.stats.TpsTracker;
+import com.minelaunched.stats.utils.TpsTracker;
 import java.io.File;
 import java.lang.reflect.Method;
 

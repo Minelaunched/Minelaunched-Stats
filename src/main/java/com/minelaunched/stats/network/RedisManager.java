@@ -1,5 +1,7 @@
-package com.minelaunched.stats;
+package com.minelaunched.stats.network;
 
+import com.minelaunched.stats.StatsCollector;
+import com.minelaunched.stats.MinelaunchedStatsPlugin;
 import com.google.gson.JsonObject;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;

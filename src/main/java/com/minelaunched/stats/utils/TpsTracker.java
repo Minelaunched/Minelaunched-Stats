@@ -1,4 +1,4 @@
-package com.minelaunched.stats;
+package com.minelaunched.stats.utils;
 
 import org.bukkit.scheduler.BukkitRunnable;
 
