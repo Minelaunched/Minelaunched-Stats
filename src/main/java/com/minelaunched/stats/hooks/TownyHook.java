@@ -5,11 +5,17 @@ import org.bukkit.entity.Player;
 import com.google.gson.JsonObject;
 import java.lang.reflect.Method;
 
-public class TownyHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class TownyHook extends MinelaunchedHook {
     private static boolean initialized = false;
     private static Class<?> townyUniverseClass = null;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("Towny") != null) {
             try {
                 townyUniverseClass = Class.forName("com.palmergames.bukkit.towny.TownyUniverse");
@@ -21,7 +27,8 @@ public class TownyHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return initialized;
     }
 
@@ -65,4 +72,27 @@ public class TownyHook {
         }
         return null;
     }
+
+    @Override
+    public String getPluginName() {
+        return "towny";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("title", "town", "nation");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject townyData = getPlayerData(p);
+                    if (townyData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.towny.export_town", true) && townyData.has("town")) filtered.add("town", townyData.get("town"));
+                        if (config.getBoolean("hooks.towny.export_nation", true) && townyData.has("nation")) filtered.add("nation", townyData.get("nation"));
+                        if (config.getBoolean("hooks.towny.export_title", true) && townyData.has("title")) filtered.add("title", townyData.get("title"));
+                        if (filtered.size() > 0) po.add("towny", filtered);
+                    }
+    }
+
 }

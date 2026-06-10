@@ -5,11 +5,17 @@ import org.bukkit.entity.Player;
 
 import java.lang.reflect.Method;
 
-public class DeluxeTagsHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class DeluxeTagsHook extends MinelaunchedHook {
     private static boolean enabled = false;
     private static Method getPlayerDisplayTag;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("DeluxeTags") != null) {
             try {
                 Class<?> apiClass = Class.forName("me.clip.deluxetags.DeluxeTag");
@@ -22,7 +28,8 @@ public class DeluxeTagsHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -34,4 +41,21 @@ public class DeluxeTagsHook {
             return null;
         }
     }
+
+    @Override
+    public String getPluginName() {
+        return "deluxetags";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("active_tag");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        String activeTag = getActiveTag(p);
+                    if (activeTag != null) po.addProperty("active_tag", activeTag);
+    }
+
 }

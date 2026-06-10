@@ -6,12 +6,18 @@ import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.Method;
 
-public class VotingPluginHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class VotingPluginHook extends MinelaunchedHook {
     private static boolean enabled = false;
     private static Object userManager;
     private static Method getVotingPluginUserMethod;
 
-    public static void init() {
+    @Override
+    public void init() {
         Plugin plugin = Bukkit.getPluginManager().getPlugin("VotingPlugin");
         if (plugin != null) {
             try {
@@ -30,7 +36,8 @@ public class VotingPluginHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -45,4 +52,20 @@ public class VotingPluginHook {
         } catch (Exception e) {}
         return 0;
     }
+
+    @Override
+    public String getPluginName() {
+        return "votingplugin";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("total_votes");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        po.addProperty("total_votes", getTotalVotes(p));
+    }
+
 }

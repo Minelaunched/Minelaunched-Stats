@@ -9,7 +9,6 @@ import com.minelaunched.stats.network.WebServer;
 import com.minelaunched.stats.network.RedisManager;
 import com.minelaunched.stats.utils.TpsTracker;
 import com.minelaunched.stats.utils.AutoUpdater;
-import com.minelaunched.stats.config.ConfigManager;
 
 public class MinelaunchedStatsPlugin extends JavaPlugin {
 
@@ -20,17 +19,19 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
-        // Dynamically inject missing keys from the internal config.yml into the user's file
-        getConfig().options().copyDefaults(true);
-        saveConfig();
 
         tpsTracker = new TpsTracker();
         tpsTracker.runTaskTimer(this, 0L, 1L);
 
         // Initialize Plugin Hooks safely
         com.minelaunched.stats.hooks.HookManager.initAll();
-        com.minelaunched.stats.hooks.LiteBansHook.init();
-        com.minelaunched.stats.hooks.AdvancedBanHook.init();
+        
+        // Register all default paths for hooks automatically
+        com.minelaunched.stats.hooks.HookManager.registerAllDefaults(getConfig());
+        
+        // Dynamically inject missing keys from the internal config.yml and hooks into the user's file
+        getConfig().options().copyDefaults(true);
+        saveConfig();
 
         // Initialize Web Server
         int port = getConfig().getInt("web.port", 8080);
@@ -106,7 +107,7 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
         
         // Reload config
         reloadConfig();
-        ConfigManager.migrateConfig(this);
+        com.minelaunched.stats.hooks.HookManager.registerAllDefaults(getConfig());
         getConfig().options().copyDefaults(true);
         saveConfig();
         

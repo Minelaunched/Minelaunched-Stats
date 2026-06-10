@@ -5,10 +5,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import java.lang.reflect.Method;
 
-public class MarriageMasterHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class MarriageMasterHook extends MinelaunchedHook {
     private static boolean enabled = false;
 
-    public static void init() {
+    @Override
+    public void init() {
         Plugin plugin = Bukkit.getPluginManager().getPlugin("MarriageMaster");
         if (plugin != null) {
             try {
@@ -21,7 +27,8 @@ public class MarriageMasterHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -36,4 +43,23 @@ public class MarriageMasterHook {
             return null;
         }
     }
+
+    @Override
+    public String getPluginName() {
+        return "marriagemaster";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("partner");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        Object val = getStats(p);
+                    if (val instanceof Number) po.addProperty("partner_name", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("partner_name", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("partner_name", (String) val);
+    }
+
 }

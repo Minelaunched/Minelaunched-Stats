@@ -5,12 +5,18 @@ import org.bukkit.entity.Player;
 
 import java.lang.reflect.Method;
 
-public class VulcanHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class VulcanHook extends MinelaunchedHook {
     private static boolean enabled = false;
     private static Object vulcanApi;
     private static Method getPlayerData;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("Vulcan") != null) {
             try {
                 Class<?> vulcanClass = Class.forName("me.frep.vulcan.api.VulcanAPI");
@@ -28,7 +34,8 @@ public class VulcanHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -49,4 +56,20 @@ public class VulcanHook {
             return 0;
         }
     }
+
+    @Override
+    public String getPluginName() {
+        return "vulcan";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("violations");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        po.addProperty("vulcan_violations", getViolations(p));
+    }
+
 }

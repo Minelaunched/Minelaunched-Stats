@@ -6,12 +6,18 @@ import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.Method;
 
-public class TokenManagerHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class TokenManagerHook extends MinelaunchedHook {
     private static boolean enabled = false;
     private static Plugin tokenManagerPlugin;
     private static Method getTokensMethod;
 
-    public static void init() {
+    @Override
+    public void init() {
         tokenManagerPlugin = Bukkit.getPluginManager().getPlugin("TokenManager");
         if (tokenManagerPlugin != null) {
             try {
@@ -24,7 +30,8 @@ public class TokenManagerHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -46,4 +53,20 @@ public class TokenManagerHook {
             return 0;
         }
     }
+
+    @Override
+    public String getPluginName() {
+        return "tokenmanager";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("tokens");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        po.addProperty("tokens", getTokens(p));
+    }
+
 }

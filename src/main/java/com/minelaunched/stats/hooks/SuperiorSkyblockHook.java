@@ -6,14 +6,20 @@ import org.bukkit.entity.Player;
 
 import java.lang.reflect.Method;
 
-public class SuperiorSkyblockHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class SuperiorSkyblockHook extends MinelaunchedHook {
     private static boolean enabled = false;
     private static Method getPlayerMethod;
     private static Method getIslandMethod;
     private static Method getIslandLevelMethod;
     private static Method getNameMethod;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("SuperiorSkyblock2") != null) {
             try {
                 Class<?> apiClass = Class.forName("com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI");
@@ -34,7 +40,8 @@ public class SuperiorSkyblockHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -64,4 +71,26 @@ public class SuperiorSkyblockHook {
             return null;
         }
     }
+
+    @Override
+    public String getPluginName() {
+        return "superiorskyblock2";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("island_name", "island_level");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject ssData = getPlayerData(p);
+                    if (ssData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.superiorskyblock2.export_island_level", true) && ssData.has("island_level")) filtered.add("island_level", ssData.get("island_level"));
+                        if (config.getBoolean("hooks.superiorskyblock2.export_island_name", true) && ssData.has("island_name")) filtered.add("island_name", ssData.get("island_name"));
+                        if (filtered.size() > 0) po.add("superiorskyblock2", filtered);
+                    }
+    }
+
 }

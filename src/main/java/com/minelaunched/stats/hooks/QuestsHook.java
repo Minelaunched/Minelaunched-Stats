@@ -5,10 +5,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import java.lang.reflect.Method;
 
-public class QuestsHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class QuestsHook extends MinelaunchedHook {
     private static boolean enabled = false;
 
-    public static void init() {
+    @Override
+    public void init() {
         Plugin plugin = Bukkit.getPluginManager().getPlugin("Quests");
         if (plugin != null) {
             try {
@@ -21,7 +27,8 @@ public class QuestsHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -36,4 +43,23 @@ public class QuestsHook {
             return 0;
         }
     }
+
+    @Override
+    public String getPluginName() {
+        return "quests";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("completed_quests");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        Object val = getStats(p);
+                    if (val instanceof Number) po.addProperty("completed_quests", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("completed_quests", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("completed_quests", (String) val);
+    }
+
 }

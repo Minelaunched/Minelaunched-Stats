@@ -4,17 +4,24 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
-public class PapiHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class PapiHook extends MinelaunchedHook {
     private static boolean initialized = false;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             initialized = true;
             Bukkit.getLogger().info("[MinelaunchedStats] Hooks: PlaceholderAPI successfully linked!");
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return initialized;
     }
 
@@ -26,4 +33,33 @@ public class PapiHook {
             return text;
         }
     }
+
+    @Override
+    public String getPluginName() {
+        return "placeholderapi";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList();
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject papi = new JsonObject();
+                    for (String ph : config.getStringList("hooks.placeholderapi.player_placeholders")) {
+                        papi.addProperty(ph, setPlaceholders(p, ph));
+                    }
+                    po.add("placeholders", papi);
+    }
+
+    @Override
+    public void appendServerStats(JsonObject server, FileConfiguration config) {
+        JsonObject papi = new JsonObject();
+                for (String ph : config.getStringList("hooks.placeholderapi.server_placeholders")) {
+                    papi.addProperty(ph, setPlaceholders(null, ph));
+                }
+                server.add("placeholders", papi);
+    }
+
 }

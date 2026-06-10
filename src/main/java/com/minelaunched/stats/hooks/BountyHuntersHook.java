@@ -6,12 +6,18 @@ import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.Method;
 
-public class BountyHuntersHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class BountyHuntersHook extends MinelaunchedHook {
     private static boolean enabled = false;
     private static Object bountyManager;
     private static Method getBountyMethod;
 
-    public static void init() {
+    @Override
+    public void init() {
         Plugin plugin = Bukkit.getPluginManager().getPlugin("BountyHunters");
         if (plugin != null) {
             try {
@@ -32,7 +38,8 @@ public class BountyHuntersHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -47,4 +54,20 @@ public class BountyHuntersHook {
         } catch (Exception e) {}
         return 0;
     }
+
+    @Override
+    public String getPluginName() {
+        return "bountyhunters";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("bounty_reward");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        po.addProperty("bounty_reward", getBountyReward(p));
+    }
+
 }

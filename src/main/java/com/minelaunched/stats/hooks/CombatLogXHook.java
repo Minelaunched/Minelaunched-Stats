@@ -6,12 +6,18 @@ import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.Method;
 
-public class CombatLogXHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class CombatLogXHook extends MinelaunchedHook {
     private static boolean enabled = false;
     private static Object combatManager;
     private static Method isInCombatMethod;
 
-    public static void init() {
+    @Override
+    public void init() {
         Plugin plugin = Bukkit.getPluginManager().getPlugin("CombatLogX");
         if (plugin != null) {
             try {
@@ -26,7 +32,8 @@ public class CombatLogXHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -38,4 +45,20 @@ public class CombatLogXHook {
             return false;
         }
     }
+
+    @Override
+    public String getPluginName() {
+        return "combatlogx";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("is_in_combat");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        po.addProperty("is_in_combat", isInCombat(p));
+    }
+
 }

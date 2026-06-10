@@ -5,10 +5,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import com.google.gson.JsonObject;
 
-public class ViaVersionHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class ViaVersionHook extends MinelaunchedHook {
     private static boolean initialized = false;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("ViaVersion") != null) {
             try {
                 Class.forName("com.viaversion.viaversion.api.Via");
@@ -20,7 +26,8 @@ public class ViaVersionHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return initialized;
     }
 
@@ -36,4 +43,21 @@ public class ViaVersionHook {
         }
         return null;
     }
+
+    @Override
+    public String getPluginName() {
+        return "viaversion";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("protocol_version");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject viaData = getPlayerData(p);
+                    if (viaData != null) po.add("viaversion", viaData);
+    }
+
 }

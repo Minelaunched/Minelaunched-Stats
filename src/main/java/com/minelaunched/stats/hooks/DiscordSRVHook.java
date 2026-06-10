@@ -5,13 +5,19 @@ import org.bukkit.entity.Player;
 
 import java.lang.reflect.Method;
 
-public class DiscordSRVHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class DiscordSRVHook extends MinelaunchedHook {
     private static boolean enabled = false;
     private static Object discordSrvApi;
     private static Method getAccountLinkManager;
     private static Method getDiscordId;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("DiscordSRV") != null) {
             try {
                 Class<?> discordSrvClass = Class.forName("github.scarsz.discordsrv.DiscordSRV");
@@ -33,7 +39,8 @@ public class DiscordSRVHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -45,4 +52,21 @@ public class DiscordSRVHook {
             return null;
         }
     }
+
+    @Override
+    public String getPluginName() {
+        return "discordsrv";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("discord_id");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        String discordId = getDiscordId(p);
+                    if (discordId != null) po.addProperty("discord_id", discordId);
+    }
+
 }

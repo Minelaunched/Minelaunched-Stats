@@ -7,14 +7,20 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
-public class GriefPreventionHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class GriefPreventionHook extends MinelaunchedHook {
     private static boolean initialized = false;
     private static Object dataStoreInstance = null;
     private static Method getPlayerDataMethod = null;
     private static Method getAccruedMethod = null;
     private static Method getBonusMethod = null;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("GriefPrevention") != null) {
             try {
                 Class<?> gpClass = Class.forName("me.ryanhamshire.GriefPrevention.GriefPrevention");
@@ -35,7 +41,8 @@ public class GriefPreventionHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return initialized;
     }
 
@@ -65,4 +72,27 @@ public class GriefPreventionHook {
         }
         return null;
     }
+
+    @Override
+    public String getPluginName() {
+        return "griefprevention";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("claim_blocks", "bonus_blocks");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject gpData = getPlayerData(p);
+                    if (gpData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.griefprevention.export_claim_blocks", true) && gpData.has("claim_blocks")) filtered.add("claim_blocks", gpData.get("claim_blocks"));
+                        if (config.getBoolean("hooks.griefprevention.export_bonus_blocks", true) && gpData.has("bonus_blocks")) filtered.add("bonus_blocks", gpData.get("bonus_blocks"));
+                        if (gpData.has("total_blocks")) filtered.add("total_blocks", gpData.get("total_blocks"));
+                        if (filtered.size() > 0) po.add("griefprevention", filtered);
+                    }
+    }
+
 }

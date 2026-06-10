@@ -6,12 +6,18 @@ import com.google.gson.JsonObject;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
-public class PlayerPointsHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class PlayerPointsHook extends MinelaunchedHook {
     private static boolean initialized = false;
     private static Object apiInstance = null;
     private static Method lookMethod = null;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("PlayerPoints") != null) {
             try {
                 Class<?> ppClass = Class.forName("org.black_ixx.playerpoints.PlayerPoints");
@@ -31,7 +37,8 @@ public class PlayerPointsHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return initialized;
     }
 
@@ -47,4 +54,21 @@ public class PlayerPointsHook {
         }
         return null;
     }
+
+    @Override
+    public String getPluginName() {
+        return "playerpoints";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("balance");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject ppData = getPlayerData(p);
+                    if (ppData != null) po.add("playerpoints", ppData);
+    }
+
 }

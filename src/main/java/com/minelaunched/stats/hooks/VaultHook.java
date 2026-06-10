@@ -5,11 +5,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
-public class VaultHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class VaultHook extends MinelaunchedHook {
     private static Economy econ = null;
     private static boolean initialized = false;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("Vault") == null) return;
         try {
             RegisteredServiceProvider<Economy> rsp = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
@@ -23,7 +29,8 @@ public class VaultHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return initialized;
     }
 
@@ -31,4 +38,29 @@ public class VaultHook {
         if (!initialized || econ == null) return 0.0;
         return econ.getBalance(player);
     }
+
+    @Override
+    public String getPluginName() {
+        return "vault";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("server_economy", "player_balance");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        po.addProperty("vault_balance", getBalance(p));
+    }
+
+    @Override
+    public void appendServerStats(JsonObject server, FileConfiguration config) {
+        double totalEconomy = 0;
+                for (org.bukkit.entity.Player p : Bukkit.getOnlinePlayers()) {
+                    totalEconomy += getBalance(p);
+                }
+                server.addProperty("vault_total_economy", totalEconomy);
+    }
+
 }

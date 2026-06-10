@@ -6,11 +6,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import com.google.gson.JsonObject;
 
-public class EssentialsHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class EssentialsHook extends MinelaunchedHook {
     private static Essentials ess = null;
     private static boolean initialized = false;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("Essentials") != null) {
             try {
                 ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
@@ -22,7 +28,8 @@ public class EssentialsHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return initialized;
     }
 
@@ -49,4 +56,29 @@ public class EssentialsHook {
         }
         return null;
     }
+
+    @Override
+    public String getPluginName() {
+        return "essentials";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("afk", "nickname", "god_mode", "muted", "vanish");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject essData = getPlayerData(p);
+                    if (essData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.essentials.export_afk", true) && essData.has("is_afk")) filtered.add("is_afk", essData.get("is_afk"));
+                        if (config.getBoolean("hooks.essentials.export_vanish", true) && essData.has("is_vanished")) filtered.add("is_vanished", essData.get("is_vanished"));
+                        if (config.getBoolean("hooks.essentials.export_god_mode", true) && essData.has("is_god_mode")) filtered.add("is_god_mode", essData.get("is_god_mode"));
+                        if (config.getBoolean("hooks.essentials.export_muted", true) && essData.has("is_muted")) filtered.add("is_muted", essData.get("is_muted"));
+                        if (config.getBoolean("hooks.essentials.export_nickname", true) && essData.has("nickname")) filtered.add("nickname", essData.get("nickname"));
+                        if (filtered.size() > 0) po.add("essentials", filtered);
+                    }
+    }
+
 }

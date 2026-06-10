@@ -5,11 +5,17 @@ import org.bukkit.entity.Player;
 import com.google.gson.JsonObject;
 import java.lang.reflect.Method;
 
-public class CMIHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class CMIHook extends MinelaunchedHook {
     private static boolean initialized = false;
     private static Class<?> cmiClass = null;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("CMI") != null) {
             try {
                 cmiClass = Class.forName("com.Zrips.CMI.CMI");
@@ -21,7 +27,8 @@ public class CMIHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return initialized;
     }
 
@@ -57,4 +64,27 @@ public class CMIHook {
         }
         return null;
     }
+
+    @Override
+    public String getPluginName() {
+        return "cmi";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("afk", "vanish", "god_mode");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject cmiData = getPlayerData(p);
+                    if (cmiData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.cmi.export_afk", true) && cmiData.has("is_afk")) filtered.add("is_afk", cmiData.get("is_afk"));
+                        if (config.getBoolean("hooks.cmi.export_vanish", true) && cmiData.has("is_vanished")) filtered.add("is_vanished", cmiData.get("is_vanished"));
+                        if (config.getBoolean("hooks.cmi.export_god_mode", true) && cmiData.has("is_god_mode")) filtered.add("is_god_mode", cmiData.get("is_god_mode"));
+                        if (filtered.size() > 0) po.add("cmi", filtered);
+                    }
+    }
+
 }

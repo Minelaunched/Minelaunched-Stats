@@ -5,10 +5,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import java.lang.reflect.Method;
 
-public class AdvancedBanHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class AdvancedBanHook extends MinelaunchedHook {
     private static boolean enabled = false;
 
-    public static void init() {
+    @Override
+    public void init() {
         Plugin plugin = Bukkit.getPluginManager().getPlugin("AdvancedBan");
         if (plugin != null) {
             try {
@@ -21,7 +27,8 @@ public class AdvancedBanHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -36,4 +43,23 @@ public class AdvancedBanHook {
             return false;
         }
     }
+
+    @Override
+    public String getPluginName() {
+        return "advancedban";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("is_banned");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        Object val = getStats(p);
+                    if (val instanceof Number) po.addProperty("is_banned", (Number) val);
+                    else if (val instanceof Boolean) po.addProperty("is_banned", (Boolean) val);
+                    else if (val instanceof String) po.addProperty("is_banned", (String) val);
+    }
+
 }

@@ -7,11 +7,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import com.google.gson.JsonObject;
 
-public class LuckPermsHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class LuckPermsHook extends MinelaunchedHook {
     private static LuckPerms api = null;
     private static boolean initialized = false;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("LuckPerms") != null) {
             try {
                 api = LuckPermsProvider.get();
@@ -23,7 +29,8 @@ public class LuckPermsHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return initialized;
     }
 
@@ -48,4 +55,27 @@ public class LuckPermsHook {
         }
         return null;
     }
+
+    @Override
+    public String getPluginName() {
+        return "luckperms";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("suffix", "prefix", "primary_group");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject lpData = getPlayerData(p);
+                    if (lpData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.luckperms.export_primary_group", true) && lpData.has("primary_group")) filtered.add("primary_group", lpData.get("primary_group"));
+                        if (config.getBoolean("hooks.luckperms.export_prefix", true) && lpData.has("prefix")) filtered.add("prefix", lpData.get("prefix"));
+                        if (config.getBoolean("hooks.luckperms.export_suffix", true) && lpData.has("suffix")) filtered.add("suffix", lpData.get("suffix"));
+                        if (filtered.size() > 0) po.add("luckperms", filtered);
+                    }
+    }
+
 }

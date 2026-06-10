@@ -7,12 +7,18 @@ import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.Method;
 
-public class SimpleClansHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class SimpleClansHook extends MinelaunchedHook {
     private static boolean enabled = false;
     private static Object clanManager;
     private static Method getClanPlayerMethod;
 
-    public static void init() {
+    @Override
+    public void init() {
         Plugin plugin = Bukkit.getPluginManager().getPlugin("SimpleClans");
         if (plugin != null) {
             try {
@@ -27,7 +33,8 @@ public class SimpleClansHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -50,4 +57,26 @@ public class SimpleClansHook {
         } catch (Exception e) {}
         return null;
     }
+
+    @Override
+    public String getPluginName() {
+        return "simpleclans";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("clan_name", "clan_tag");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject clanData = getClanData(p);
+                    if (clanData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.simpleclans.export_clan_name", true) && clanData.has("name")) filtered.add("clan_name", clanData.get("name"));
+                        if (config.getBoolean("hooks.simpleclans.export_clan_tag", true) && clanData.has("tag")) filtered.add("clan_tag", clanData.get("tag"));
+                        if (filtered.size() > 0) po.add("simpleclans", filtered);
+                    }
+    }
+
 }

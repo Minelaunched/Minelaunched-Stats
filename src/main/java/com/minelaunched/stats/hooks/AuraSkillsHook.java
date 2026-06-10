@@ -6,14 +6,20 @@ import com.google.gson.JsonObject;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
-public class AuraSkillsHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class AuraSkillsHook extends MinelaunchedHook {
     private static boolean initialized = false;
     private static Object apiInstance = null;
     private static Method getUserMethod = null;
     private static Method getManaMethod = null;
     private static Method getPowerLevelMethod = null;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("AuraSkills") != null || Bukkit.getPluginManager().getPlugin("AureliumSkills") != null) {
             try {
                 Class<?> apiClass;
@@ -36,7 +42,8 @@ public class AuraSkillsHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return initialized;
     }
 
@@ -71,4 +78,26 @@ public class AuraSkillsHook {
         }
         return null;
     }
+
+    @Override
+    public String getPluginName() {
+        return "auraskills";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("power_level", "mana");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject auraData = getPlayerData(p);
+                    if (auraData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.auraskills.export_mana", true) && auraData.has("mana")) filtered.add("mana", auraData.get("mana"));
+                        if (config.getBoolean("hooks.auraskills.export_power_level", true) && auraData.has("power_level")) filtered.add("power_level", auraData.get("power_level"));
+                        if (filtered.size() > 0) po.add("auraskills", filtered);
+                    }
+    }
+
 }

@@ -7,11 +7,17 @@ import com.google.gson.JsonObject;
 import java.lang.reflect.Method;
 import java.util.List;
 
-public class JobsRebornHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class JobsRebornHook extends MinelaunchedHook {
     private static boolean initialized = false;
     private static Class<?> jobsClass = null;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("Jobs") != null) {
             try {
                 jobsClass = Class.forName("com.gamingmesh.jobs.Jobs");
@@ -23,7 +29,8 @@ public class JobsRebornHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return initialized;
     }
 
@@ -69,4 +76,21 @@ public class JobsRebornHook {
         }
         return null;
     }
+
+    @Override
+    public String getPluginName() {
+        return "jobsreborn";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("jobs_list");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject jobsData = getPlayerData(p);
+                    if (jobsData != null) po.add("jobsreborn", jobsData);
+    }
+
 }

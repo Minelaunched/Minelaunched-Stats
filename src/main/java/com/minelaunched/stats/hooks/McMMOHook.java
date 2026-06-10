@@ -5,11 +5,17 @@ import org.bukkit.entity.Player;
 import com.google.gson.JsonObject;
 import java.lang.reflect.Method;
 
-public class McMMOHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class McMMOHook extends MinelaunchedHook {
     private static boolean initialized = false;
     private static Method getPowerLevelMethod = null;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("mcMMO") != null) {
             try {
                 Class<?> experienceAPI = Class.forName("com.gmail.nossr50.api.ExperienceAPI");
@@ -22,7 +28,8 @@ public class McMMOHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return initialized;
     }
 
@@ -38,4 +45,21 @@ public class McMMOHook {
         }
         return null;
     }
+
+    @Override
+    public String getPluginName() {
+        return "mcmmo";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("power_level");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject mcmmoData = getPlayerData(p);
+                    if (mcmmoData != null) po.add("mcmmo", mcmmoData);
+    }
+
 }

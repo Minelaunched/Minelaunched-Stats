@@ -6,12 +6,18 @@ import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.Method;
 
-public class SkinsRestorerHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class SkinsRestorerHook extends MinelaunchedHook {
     private static boolean enabled = false;
     private static Object skinsRestorerApi;
     private static Method getSkinNameMethod;
 
-    public static void init() {
+    @Override
+    public void init() {
         Plugin plugin = Bukkit.getPluginManager().getPlugin("SkinsRestorer");
         if (plugin != null) {
             try {
@@ -43,7 +49,8 @@ public class SkinsRestorerHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -55,4 +62,21 @@ public class SkinsRestorerHook {
             return null;
         }
     }
+
+    @Override
+    public String getPluginName() {
+        return "skinsrestorer";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("skin_name");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        String skinName = getSkinName(p);
+                    if (skinName != null) po.addProperty("skin_name", skinName);
+    }
+
 }

@@ -5,14 +5,20 @@ import org.bukkit.entity.Player;
 
 import java.lang.reflect.Method;
 
-public class FactionsHook {
+import java.util.List;
+import java.util.Arrays;
+import com.google.gson.JsonObject;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class FactionsHook extends MinelaunchedHook {
     private static boolean enabled = false;
     private static Method getFPlayer;
     private static Method getFaction;
     private static Method getTag;
     private static Method getRole;
 
-    public static void init() {
+    @Override
+    public void init() {
         if (Bukkit.getPluginManager().getPlugin("Factions") != null) {
             try {
                 Class<?> fPlayersClass = Class.forName("com.massivecraft.factions.FPlayers");
@@ -36,7 +42,8 @@ public class FactionsHook {
         }
     }
 
-    public static boolean isEnabled() {
+    @Override
+    public boolean isEnabled() {
         return enabled;
     }
 
@@ -67,4 +74,29 @@ public class FactionsHook {
             return null;
         }
     }
+
+    @Override
+    public String getPluginName() {
+        return "factionsuuid";
+    }
+
+    @Override
+    public List<String> getExportKeys() {
+        return Arrays.asList("faction_role", "faction_name");
+    }
+
+    @Override
+    public void appendPlayerStats(JsonObject po, org.bukkit.entity.Player p, FileConfiguration config) {
+        JsonObject factionsData = new JsonObject();
+                    if (config.getBoolean("hooks.factionsuuid.export_faction_name", true)) {
+                        String fName = getFactionName(p);
+                        if (fName != null) factionsData.addProperty("name", fName);
+                    }
+                    if (config.getBoolean("hooks.factionsuuid.export_faction_role", true)) {
+                        String fRole = getFactionRole(p);
+                        if (fRole != null) factionsData.addProperty("role", fRole);
+                    }
+                    if (factionsData.size() > 0) po.add("factions", factionsData);
+    }
+
 }
