@@ -34,10 +34,12 @@ mindmap
       Server Stats
       Worlds & Entities
       Players
-    23 API Hooks
+    28 API Hooks
       Economy
         Vault
         PlayerPoints
+        TokenManager
+        BountyHunters
         Jobs Reborn
       Admin
         LuckPerms
@@ -50,6 +52,7 @@ mindmap
         SkinsRestorer
         DeluxeTags
         CombatLogX
+        PvPManager
       RPG & Survival
         AuraSkills
         mcMMO
@@ -58,9 +61,12 @@ mindmap
         FactionsUUID
         SuperiorSkyblock2
         GriefPrevention
+        SimpleClans
       Clients & Formats
         ViaVersion
         Floodgate
+      Social & Misc
+        VotingPlugin
         PlaceholderAPI
     Smart Auto-Updater
       GitHub Releases
@@ -185,6 +191,11 @@ To make MinelaunchedStats truly universal, we have implemented completely safe, 
 - **DeluxeTags:** Exports the `active_tag` (chat prefix) of the player.
 - **SkinsRestorer:** Exports the `skin_name` worn by cracked players.
 - **CombatLogX:** Exports a boolean `is_in_combat` if the player is currently in PvP.
+- **PvPManager:** Exports `is_in_combat` and `has_pvp_enabled`.
+- **TokenManager:** Exports the `tokens` balance of the player.
+- **SimpleClans:** Exports the `clan_name` and `clan_tag`.
+- **VotingPlugin:** Exports the `total_votes` of the player.
+- **BountyHunters:** Exports the active `bounty_reward` on the player's head.
 - **Citizens:** Detects if the entity is an NPC (`is_npc`). Crucial for web dashboards to filter out fake players.
 
 > **💡 Granular Control:** Every single exported property from these APIs can be individually disabled in `config.yml`. Don't want the nickname from Essentials? Set `export_nickname: false`.

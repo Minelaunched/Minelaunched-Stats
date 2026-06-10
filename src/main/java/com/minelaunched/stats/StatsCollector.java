@@ -467,6 +467,33 @@ public class StatsCollector implements Callable<JsonObject> {
                     po.addProperty("is_npc", com.minelaunched.stats.hooks.CitizensHook.isNPC(p));
                 }
 
+                if (config.getBoolean("hooks.tokenmanager.enabled", true) && config.getBoolean("hooks.tokenmanager.export_tokens", true) && com.minelaunched.stats.hooks.TokenManagerHook.isEnabled()) {
+                    po.addProperty("tokens", com.minelaunched.stats.hooks.TokenManagerHook.getTokens(p));
+                }
+
+                if (config.getBoolean("hooks.pvpmanager.enabled", true) && com.minelaunched.stats.hooks.PvPManagerHook.isEnabled()) {
+                    if (config.getBoolean("hooks.pvpmanager.export_is_in_combat", true)) po.addProperty("is_in_pvpmanager_combat", com.minelaunched.stats.hooks.PvPManagerHook.isInCombat(p));
+                    if (config.getBoolean("hooks.pvpmanager.export_has_pvp_enabled", true)) po.addProperty("has_pvp_enabled", com.minelaunched.stats.hooks.PvPManagerHook.hasPvPEnabled(p));
+                }
+
+                if (config.getBoolean("hooks.simpleclans.enabled", true) && com.minelaunched.stats.hooks.SimpleClansHook.isEnabled()) {
+                    JsonObject clanData = com.minelaunched.stats.hooks.SimpleClansHook.getClanData(p);
+                    if (clanData != null) {
+                        JsonObject filtered = new JsonObject();
+                        if (config.getBoolean("hooks.simpleclans.export_clan_name", true) && clanData.has("name")) filtered.add("clan_name", clanData.get("name"));
+                        if (config.getBoolean("hooks.simpleclans.export_clan_tag", true) && clanData.has("tag")) filtered.add("clan_tag", clanData.get("tag"));
+                        if (filtered.size() > 0) po.add("simpleclans", filtered);
+                    }
+                }
+
+                if (config.getBoolean("hooks.votingplugin.enabled", true) && config.getBoolean("hooks.votingplugin.export_total_votes", true) && com.minelaunched.stats.hooks.VotingPluginHook.isEnabled()) {
+                    po.addProperty("total_votes", com.minelaunched.stats.hooks.VotingPluginHook.getTotalVotes(p));
+                }
+
+                if (config.getBoolean("hooks.bountyhunters.enabled", true) && config.getBoolean("hooks.bountyhunters.export_bounty_reward", true) && com.minelaunched.stats.hooks.BountyHuntersHook.isEnabled()) {
+                    po.addProperty("bounty_reward", com.minelaunched.stats.hooks.BountyHuntersHook.getBountyReward(p));
+                }
+
                 if (config.getBoolean(cp + ".potion_effects", true)) {
                     JsonArray effects = new JsonArray();
                     for (PotionEffect effect : p.getActivePotionEffects()) {

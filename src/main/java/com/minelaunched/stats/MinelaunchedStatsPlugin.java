@@ -47,6 +47,11 @@ public class MinelaunchedStatsPlugin extends JavaPlugin {
         com.minelaunched.stats.hooks.DeluxeTagsHook.init();
         com.minelaunched.stats.hooks.SkinsRestorerHook.init();
         com.minelaunched.stats.hooks.CitizensHook.init();
+        com.minelaunched.stats.hooks.TokenManagerHook.init();
+        com.minelaunched.stats.hooks.PvPManagerHook.init();
+        com.minelaunched.stats.hooks.SimpleClansHook.init();
+        com.minelaunched.stats.hooks.VotingPluginHook.init();
+        com.minelaunched.stats.hooks.BountyHuntersHook.init();
 
         // Initialize Web Server
         int port = getConfig().getInt("web.port", 8080);

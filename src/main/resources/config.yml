@@ -136,6 +136,28 @@ hooks:
     enabled: true
     export_is_npc: true
 
+  tokenmanager:
+    enabled: true
+    export_tokens: true
+
+  pvpmanager:
+    enabled: true
+    export_is_in_combat: true
+    export_has_pvp_enabled: true
+
+  simpleclans:
+    enabled: true
+    export_clan_name: true
+    export_clan_tag: true
+
+  votingplugin:
+    enabled: true
+    export_total_votes: true
+
+  bountyhunters:
+    enabled: true
+    export_bounty_reward: true
+
 # Toggle EVERY single statistic individually. Set to false to disable.
 stats:
   system:
